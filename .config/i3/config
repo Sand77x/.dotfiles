@@ -24,11 +24,12 @@ font pango:DejaVu Sans Mono 11
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# !! remember to install i3lock-color https://github.com/Raymo111/i3lock-color/
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock-color to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- sh -c '. "$HOME/.bash/path.sh" && i3lock-cool'
 
-# !! remember to install tuned service also for battery saving
+# !! remember to install tuned service for battery saving
 # Suspend after 4 minutes idle
 exec --no-startup-id xautolock -time 4 -locker "systemctl suspend"
 
@@ -42,7 +43,7 @@ exec --no-startup-id xautolock -time 4 -locker "systemctl suspend"
 # start policykit authentication agent
 exec --no-startup-id  /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 
-# set keyboard layout
+# set keyboard layout (disable caps lock)
 exec --no-startup-id setxkbmap us -option caps:none
 
 # Start feh for background
@@ -61,7 +62,7 @@ exec_always --no-startup-id picom -b
 bindsym XF86PowerOff exec --no-startup-id . $HOME/.bash/path.sh && power-menu
 
 # common dunstify call
-set $dunstify_id dunstify -r 9999
+set $dunstify_id dunstify -r 6767
 
 # using pamixer to set volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id sh -c 'pamixer -i 5 && $dunstify_id -i audio-volume-high " Volume: $(pamixer --get-volume)%"'
@@ -87,23 +88,15 @@ bindsym Shift+Print exec --no-startup-id flameshot gui
 bindsym Print exec --no-startup-id flameshot full -c
 bindsym $mod+e exec --no-startup-id . $HOME/.bash/path.sh && dmenu-emoji
 bindsym $mod+b exec brave-browser
-bindsym $mod+a exec --no-startup-id . $HOME/.bash/path.sh && boomer
+bindsym $mod+a exec --no-startup-id boomer
 
 # kill focused window
 bindsym $mod+w kill
 
 # start dmenu (a program launcher)
-bindsym $mod+z exec --no-startup-id . $HOME/.bash/path.sh && dmenu_desktop
-bindsym $mod+Shift+z exec --no-startup-id . $HOME/.bash/path.sh && dmenu_run
-bindsym $mod+Shift+w exec --no-startup-id . $HOME/.bash/path.sh && dmenu_pkill
-
-# A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+d exec --no-startup-id i3-dmenu-desktop
-# window finder
-bindsym $mod+t exec rofi -show
+bindsym $mod+z exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Shift+z exec --no-startup-id dmenu_run
+bindsym $mod+Shift+w exec --no-startup-id . $HOME/.bash/path.sh && dmenu-pkill
 
 # change focus
 bindsym $mod+h focus left

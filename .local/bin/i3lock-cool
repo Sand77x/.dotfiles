@@ -1,0 +1,64 @@
+#!/bin/sh
+
+#///////////////////////#
+#        L O C K        #
+#///////////////////////#
+#      C O N F I G      #
+#///////////////////////#
+
+alpha='dd'
+background='#1d2021'
+selection='#504945'
+comment='#35c462'
+
+yellow='#e0b14d'
+orange='#e78a4e'
+red='#ea6962'
+magenta='#d3869b'
+blue='#7daea3'
+cyan='#89b482'
+green='#35c462'
+
+i3lock \
+  --insidever-color=$background \
+  --insidewrong-color=$background \
+  --inside-color=$background \
+  --ringver-color=$green$alpha \
+  --ringwrong-color=$red$alpha \
+  --ringver-color=$green$alpha \
+  --ringwrong-color=$red$alpha \
+  --ring-color=$background \
+  --line-uses-ring \
+  --keyhl-color=$green$alpha \
+  --bshl-color=$orange$alpha \
+  --separator-color=$selection$alpha \
+  --verif-color=$green \
+  --wrong-color=$red \
+  --layout-color=$blue \
+  --date-color=$comment \
+  --time-color=$comment \
+  --screen 1 \
+  --blur 5 \
+  --clock \
+  --indicator \
+  --time-str="%H:%M:%S" \
+  --date-str="%a %b %e, %Y" \
+  --verif-text="Checking..." \
+  --wrong-text="Hacker!" \
+  --noinput="No Input" \
+  --lock-text="Locking..." \
+  --lockfailed="Lock Failed" \
+  --radius=120 \
+  --ring-width=20 \
+  --pass-media-keys \
+  --pass-screen-keys \
+  --pass-volume-keys \
+  --time-font="Iosevka Term" \
+  --date-font="Iosevka Term" \
+  --layout-font="Iosevka Term" \
+  --verif-font="Iosevka Term" \
+  --wrong-font="Iosevka Term" \
+
+# Author: Dracula theme
+# (former) Editor: Brandon Puc
+# https://gitlab.com/bpuc/dotfiles/-/blob/main/config/scripts/lock.sh?ref_type=heads
