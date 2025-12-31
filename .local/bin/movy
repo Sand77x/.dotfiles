@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e  # Exit on error
+
+SCRIPT_DIR="$HOME/Projects/python/movy-cli"
+"$SCRIPT_DIR/venv/bin/python" "$SCRIPT_DIR/movy.py" "$@"

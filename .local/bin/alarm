@@ -1,0 +1,24 @@
+#!/bin/bash
+
+ALARM_SOUND="$HOME/Music/Alarms/dio-wryyy.mp3"
+ALARM_ICON="$HOME/Pictures/Emotes/monka.png"
+
+if [ $# -lt 2 ]; then
+    echo "USAGE: alarm [time] [msg]"
+    exit 1
+fi
+
+TIME="$1"
+shift
+MSG="$*"
+
+echo "ffplay -v 0 -nodisp -autoexit \"$ALARM_SOUND\" & notify-send -i $ALARM_ICON -u critical \"ALARM\" \"$MSG\"" | at "$TIME" >/dev/null 2>&1
+
+if [ $? -eq 0 ]; then
+    echo "Setting alarm \"$MSG\" at $TIME"
+    notify-send "ALARM" "Setting alarm \"$MSG\" at $TIME"
+else
+    echo "Failed to set alarm."
+    notify-send "ALARM" "Failed to set alarm."
+fi
+

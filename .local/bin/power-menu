@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Options
+options="Cancel\nSuspend\nLogout\nShutdown\nReboot"
+
+# Launch dmenu
+choice=$(echo -e "$options" | dmenu -i)
+
+# Act based on selection
+case "$choice" in
+    "Suspend")
+        systemctl suspend
+        ;;
+    "Logout")
+        i3-msg exit
+        ;;
+    "Shutdown")
+        systemctl poweroff
+        ;;
+    "Reboot")
+        systemctl reboot
+        ;;
+    "Cancel" | *)
+        # Do nothing
+        ;;
+esac

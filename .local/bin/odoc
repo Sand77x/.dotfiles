@@ -1,0 +1,112 @@
+#!/bin/bash
+
+odoc() {
+    local DEF_GREP_N=10
+    local DOCDIR="$HOME/odoc"
+    local HELP="
+odoc <mode> [file] [args]
+a   Add new doc
+l   List docs
+rn  Rename doc
+s   Show doc [.scratch if none]
+gr  Grep in doc
+e   Edit doc [.scratch if none]
+d   Delete doc
+    "
+    local mode="$1"
+    local arg="$2"
+    local editor
+    editor=$(command -v nvim 2>/dev/null || echo nano)
+
+    # Ensure docs directory exists
+    mkdir -p "$DOCDIR"
+
+    # Help / usage check
+    if [ -z "$mode" ]; then
+        echo "$HELP"
+        return
+    fi
+
+    local file="$DOCDIR/$arg.md"
+
+    case "${mode,,}" in 
+        "a")
+            if [ -e "$file" ]; then
+                echo "Doc already exists."
+                return
+            fi
+            touch "$file"
+            echo "Doc created: $file"
+            ;;
+
+        "l")
+            ls "$DOCDIR"
+            ;;
+
+        "rn")
+            if [ ! -e "$file" ]; then
+                echo "Doc doesn't exist."
+                return
+            fi
+            local new_name="$3"
+            if [ -z "$new_name" ] || [ -e "$DOCDIR/$new_name.md" ]; then
+                echo "Invalid rename target. Provide a new name as the third argument."
+                return
+            fi
+            mv "$file" "$DOCDIR/$new_name.md"
+            echo "Doc renamed to: $new_name.md"
+            ;;
+
+        "s")
+            if [ -z "$arg" ]; then
+                file="$DOCDIR/.scratch.md"
+                [ ! -e "$file" ] && { echo "# scratch" > "$file"; }
+                cat "$file"
+                return
+            fi
+            if [ ! -e "$file" ]; then
+                echo "Doc doesn't exist."
+                return
+            fi
+            if [ -z "$3" ]; then
+                cat "$file"
+            else
+                head -n "$3" "$file"
+            fi
+            ;;
+
+        "gr")
+            if [ ! -e "$file" ]; then
+                echo "Doc doesn't exist."
+                return
+            fi
+            if [ -z "$3" ]; then
+                echo "Enter header to grep as 3rd arg."
+                return
+            fi
+            grep "$3" -A "${4:-$DEF_GREP_N}" "$file"
+            ;;
+
+        "e")
+            if [ -z "$arg" ]; then
+                file="$DOCDIR/.scratch.md"
+                [ ! -e "$file" ] && echo "# scratch" > "$file"
+            fi
+            "$editor" "$file"
+            ;;
+
+        "d")
+            if [ ! -e "$file" ]; then
+                echo "Doc doesn't exist."
+                return
+            fi
+            rm -v "$file"
+            ;;
+
+        *)
+            echo "Invalid mode."
+            ;;
+    esac
+}
+
+odoc "$@"

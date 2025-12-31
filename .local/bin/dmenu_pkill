@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+kill -15 $(ps -u $USER -o pid,%mem,%cpu,comm | sort -b -k2 -r | sed -n '1!p' | dmenu -i | awk '{print $1}')

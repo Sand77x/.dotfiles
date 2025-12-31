@@ -1,0 +1,11 @@
+[Default Applications]
+image/jpeg=sxiv.desktop
+image/png=sxiv.desktop
+text/plain=nvim.desktop
+application/pdf=sioyek.desktop
+
+[Added Associations]
+image/jpeg=sxiv.desktop;
+image/png=sxiv.desktop;
+audio/mpeg=vlc.desktop;
+application/pdf=atril.desktop

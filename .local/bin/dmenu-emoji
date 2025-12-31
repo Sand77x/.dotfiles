@@ -1,0 +1,24 @@
+#!/bin/sh
+
+EMOJI_FILE="$HOME/.local/share/my-assets/emojis/emoji.txt"
+
+choice=$(awk '{$1=""; sub(/^ /,""); print}' "$EMOJI_FILE" | dmenu -i -p "Emoji:")
+
+[ -z "$choice" ] && exit
+
+emoji=$(awk -v desc="$choice" '
+{
+  d=$0
+  sub(/^[^ ]+ /,"",d)
+  if (d == desc) {
+    print $1
+    exit
+  }
+}' "$EMOJI_FILE")
+
+# Copy to clipboard
+printf "%s" "$emoji" | xclip -selection clipboard
+
+# Optional: type it as well
+xdotool key Ctrl+Shift+V
+

@@ -1,0 +1,17 @@
+[core]
+	editor = nvim
+	autocrlf = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+	dog = log --all --decorate --oneline --graph
+	fush = push --force-with-lease
+	frune = fetch --prune
+	ball = branch --all
+	cend = commit --amend
+[user]
+	name = sand77x
+	email = sand77x@gmail.com

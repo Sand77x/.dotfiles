@@ -1,0 +1,26 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/rose_pine.toml"
+]
+
+[window]
+opacity = 0.90
+
+[window.padding]
+x = 4
+y = 4
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "Iosevka Nerd Font Mono"
+style = "Regular"
+
+[keyboard]
+bindings = [
+    { key = "Space", mods = "Control", mode = "~Search", action = "ToggleViMode" },
+    { key = "H", mods = "Shift", mode = "Vi", action = "First" },
+    { key = "L", mods = "Shift", mode = "Vi", action = "Last" },
+    { key = "N", mods = "Shift|Control", mode = "~Search", action = "CreateNewWindow" }
+]
