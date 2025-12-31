@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# patched by Rendell Ngo (updates cache if any executable is new)
+# called by dmenu_run in from suckless_tools package
+# replaces /usr/bin/dmenu_path
+
+cachedir="${XDG_CACHE_HOME:-"$HOME/.cache"}"
+cache="$cachedir/dmenu_run"
+
+[ ! -e "$cachedir" ] && mkdir -p "$cachedir"
+
+IFS=:
+if find $PATH -type f -executable -newer "$cache" 2>/dev/null | grep -q .; then
+    stest -flx $PATH | sort -u | tee "$cache"
+else
+    cat "$cache"
+fi

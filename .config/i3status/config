@@ -31,7 +31,8 @@ battery all {
         last_full_capacity = true
         integer_battery_capacity = true
         format = "Bat: %percentage -%status- (est %remaining)"
-        low_threshold = 35
+        low_threshold = 30
+        threshold_type = "percentage"
         status_chr = "CHR"
         status_bat = "PWR"
 }
