@@ -12,6 +12,5 @@
 	frune = fetch --prune
 	ball = branch --all
 	cend = commit --amend
-[user]
-	name = sand77x
-	email = sand77x@gmail.com
+[include]
+	path = ~/.gitconfig_local
