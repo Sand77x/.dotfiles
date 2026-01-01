@@ -1,5 +1,6 @@
 general {
         output_format = "i3bar"
+        markup = "pango"
         colors = true
         color_good = "#58ed3f"
         color_bad = "#ee8b2b"
@@ -16,7 +17,7 @@ order += "read_file XAUTOLOCK_STATUS"
 order += "tztime local"
 
 read_file XAUTOLOCK_STATUS {
-        color_good = "#ffffff"
+        color_good = "#42f5aa"
         format = "Autolock: %content"
         path = "~/.cache/xautolock_status"
 }
@@ -37,7 +38,7 @@ ethernet _first_ {
 battery all {
         last_full_capacity = true
         integer_battery_capacity = true
-        format = "Bat: %percentage -%status- (est %remaining)"
+        format = "<span color='#42f5aa'>Bat: %percentage</span> -%status- (est %remaining)"
         low_threshold = 30
         threshold_type = "percentage"
         status_chr = "CHR"
@@ -62,10 +63,8 @@ memory {
         format = "Mem: %used/%total"
         threshold_degraded = "50%"
         threshold_critical = "20%"
-        format_degraded = "Mem: %available+"
 }
 
 tztime local {
         format = "%H:%M %Z @ %a %m/%d/%y"
-        separator_block_width = 40
 }

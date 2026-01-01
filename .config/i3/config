@@ -33,6 +33,10 @@ $execalnsi picom -b
 # start policykit authentication agent
 $execnsi /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 
+# disable dpms and idle lock
+$execnsi xset s off
+$execnsi xset -dpms
+
 # !! remember to edit /etc/systemd/logind.conf to override power button and lid switches
 # !! remember to install i3lock-color https://github.com/Raymo111/i3lock-color/
 # use xss-lock to lock screen right before suspend call via systemctl suspend

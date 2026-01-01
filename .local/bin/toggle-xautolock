@@ -8,9 +8,9 @@ CACHE="$HOME/.cache/xautolock_status"
 if [ "$(cat "$CACHE")" = " ON" ]; then
     xautolock -disable
     echo "OFF" > "$CACHE"
-    dunstify -r 6767 -i system-lock-screen "Lock Screen OFF"
+    dunstify -r 6767 -i system-lock-screen "Autolock: OFF"
 else
     xautolock -enable
     echo " ON" > "$CACHE"
-    dunstify -r 6767 -i system-lock-screen "Lock Screen ON"
+    dunstify -r 6767 -i system-lock-screen "Autolock: ON"
 fi
