@@ -12,7 +12,14 @@ order += "load"
 order += "cpu_temperature 0"
 order += "memory"
 order += "battery all"
+order += "read_file XAUTOLOCK_STATUS"
 order += "tztime local"
+
+read_file XAUTOLOCK_STATUS {
+        color_good = "#ffffff"
+        format = "Autolock: %content"
+        path = "~/.cache/xautolock_status"
+}
 
 wireless _first_ {
         # format_up = "Wlan: \"%essid\" %bitrate ip=%ip (no hack pls)"

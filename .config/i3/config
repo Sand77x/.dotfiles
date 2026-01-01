@@ -18,12 +18,13 @@ tiling_drag modifier titlebar
 font pango:DejaVu Sans Mono 11
 
 # common calls
-set $execnsi     exec --no-startup-id
-set $execalnsi   exec_always --no-startup-id
-set $dify        dunstify -r 6767
-set $runsh       sh -c
+set $execnsi          exec --no-startup-id
+set $execalnsi        exec_always --no-startup-id
+set $dify             dunstify -r 6767
+set $runsh            sh -c
+set $refresh_i3status killall -SIGUSR1 i3status
 
-# directory vars
+# directory and file vars
 set $ssdir       ~/Pictures/Screenshots
 
 # Start the compositor
@@ -46,6 +47,8 @@ $execnsi setxkbmap us -option caps:none
 # !! remember to install tuned service for battery saving
 # suspend after 4 minutes idle
 $execnsi xautolock -time 4 -locker "systemctl suspend"
+# write to cache (I manager this)
+$execnsi sh -c 'echo " ON" > ~/.cache/xautolock_status'
 
 # Start feh for background
 $execnsi ~/.fehbg
@@ -63,11 +66,14 @@ bindsym $mod+Shift+m         $execnsi $runsh 'pamixer --default-source -t && $di
 bindsym XF86MonBrightnessUp   $execnsi $runsh '$dify -i weather-clear       " Brightness: $(light -A 10 && light -G | cut -d. -f1)%"'
 bindsym XF86MonBrightnessDown $execnsi $runsh '$dify -i weather-clear-night " Brightness: $(light -U 10 && light -G | cut -d. -f1)%"'
 
+# enable / disable xautolock
+bindsym $mod+o       $execnsi toggle-xautolock && $refresh_i3status
+
 # exec applications
 bindsym Shift+Print  $execnsi flameshot gui  -c -p $ssdir
 bindsym Print        $execnsi flameshot full -c -p $ssdir
 bindsym $mod+a       $execnsi boomer
-bindsym $mod+Shift+v $execnsi dmenu-watch
+bindsym $mod+v       $execnsi dmenu-watch
 bindsym $mod+Return  exec     alacritty --working-directory ~
 bindsym $mod+b       exec     brave-browser
 

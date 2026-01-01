@@ -1,0 +1,16 @@
+#!/bin/bash
+
+CACHE="$HOME/.cache/xautolock_status"
+
+# make sure cache exists
+[ -f "$CACHE" ] || echo "OFF" > "$CACHE"
+
+if [ "$(cat "$CACHE")" = " ON" ]; then
+    xautolock -disable
+    echo "OFF" > "$CACHE"
+    dunstify -r 6767 -i system-lock-screen "Lock Screen OFF"
+else
+    xautolock -enable
+    echo " ON" > "$CACHE"
+    dunstify -r 6767 -i system-lock-screen "Lock Screen ON"
+fi
