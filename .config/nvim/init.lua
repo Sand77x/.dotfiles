@@ -76,7 +76,7 @@ local function in_git_repo()
 end
 
 if vim.fn.executable('lazygit') then
-    vim.keymap.set('n', '<leader>gs', function()
+    vim.keymap.set('n', '<leader>lg', function()
         if not in_git_repo() then
             print('Error: Not in a git repo!')
             return
@@ -85,7 +85,7 @@ if vim.fn.executable('lazygit') then
         local dir = vim.fn.expand('%:p:h')
         dir = dir:gsub('^oil://', '') -- if in oil buffer, get path
 
-        vim.fn.jobstart({ 'xfce4-terminal', '--working-directory', dir, '-e', 'lazygit' }, { detach = true })
+        vim.fn.jobstart({ 'alacritty', '--working-directory', dir, '-e', 'lazygit' }, { detach = true })
 
         -- vim.fn.jobstart({ 'wezterm', 'cli', 'spawn', '--new-window', '--cwd', dir, 'lazygit' }, { detach = true })
     end, { desc = 'Open lazygit in new wezterm window' })

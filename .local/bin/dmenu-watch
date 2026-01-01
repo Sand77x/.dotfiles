@@ -1,0 +1,8 @@
+#!/bin/sh
+
+BASE="$HOME/Videos/Watch"
+
+sel=$(find "$BASE" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' \
+  | sort | dmenu) || exit 0
+
+setsid mpv --pause --no-terminal "$BASE/$sel" </dev/null >/dev/null 2>&1 &

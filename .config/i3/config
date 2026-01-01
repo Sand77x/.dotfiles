@@ -64,11 +64,12 @@ bindsym XF86MonBrightnessUp   $execnsi $runsh '$dify -i weather-clear       " Br
 bindsym XF86MonBrightnessDown $execnsi $runsh '$dify -i weather-clear-night " Brightness: $(light -U 10 && light -G | cut -d. -f1)%"'
 
 # exec applications
-bindsym Shift+Print $execnsi flameshot gui  -c -p $ssdir
-bindsym Print       $execnsi flameshot full -c -p $ssdir
-bindsym $mod+a      $execnsi boomer
-bindsym $mod+Return exec     alacritty --working-directory ~
-bindsym $mod+b      exec     brave-browser
+bindsym Shift+Print  $execnsi flameshot gui  -c -p $ssdir
+bindsym Print        $execnsi flameshot full -c -p $ssdir
+bindsym $mod+a       $execnsi boomer
+bindsym $mod+Shift+v $execnsi dmenu-watch
+bindsym $mod+Return  exec     alacritty --working-directory ~
+bindsym $mod+b       exec     brave-browser
 
 # emoji picker
 bindsym $mod+e       $execnsi dmenu-emoji
