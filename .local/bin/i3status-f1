@@ -1,0 +1,22 @@
+#!/bin/bash
+EXEC="$HOME/Projects/i3status/i3status-f1/get-next.sh"
+FILE="$HOME/.cache/f1/next_session"
+
+output="$($EXEC)"
+read loc sesh ts <<< "$output"
+
+now=$(date +%s)
+diff=$(( ts - now ))
+days=$(( diff / 86400 ))
+hours=$(( (diff % 86400) / 3600 ))
+mins=$(( (diff % 3600) / 60 ))
+
+diff_str="${days}d${hours}h${mins}m"
+
+content="$loc ($sesh) in $diff_str"
+
+if [ $days -lt 4 ]; then
+    content="<span color=\"#ee8b2b\">$content</span>"
+fi
+
+echo "$content" > "$FILE"

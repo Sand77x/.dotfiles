@@ -7,6 +7,7 @@ general {
         interval = 5
 }
 
+order += "read_file F1"
 order += "wireless _first_"
 # order += "disk /"
 order += "load"
@@ -20,6 +21,12 @@ read_file XAUTOLOCK_STATUS {
         color_good = "#42f5aa"
         format = "Autolock: %content"
         path = "~/.cache/xautolock_status"
+}
+
+read_file F1 {
+        color_good = "#ffffff"
+        format = "%content"
+        path = "~/.cache/f1/next_session"
 }
 
 wireless _first_ {
