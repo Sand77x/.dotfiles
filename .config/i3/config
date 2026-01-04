@@ -51,8 +51,11 @@ $execnsi setxkbmap us -option caps:none
 # !! remember to install tuned service for battery saving
 # suspend after 4 minutes idle
 $execnsi xautolock -time 4 -locker "systemctl suspend"
-# write to cache (I manager this)
+# write to cache (I manage this)
 $execnsi sh -c 'echo " ON" > ~/.cache/xautolock_status'
+
+# write f1 status to cache on startup
+$execnsi i3status-f1
 
 # Start feh for background
 $execnsi ~/.fehbg

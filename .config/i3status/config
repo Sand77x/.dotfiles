@@ -7,8 +7,8 @@ general {
         interval = 5
 }
 
-order += "read_file F1"
 order += "wireless _first_"
+order += "read_file F1"
 # order += "disk /"
 order += "load"
 order += "cpu_temperature 0"
@@ -26,7 +26,7 @@ read_file XAUTOLOCK_STATUS {
 read_file F1 {
         color_good = "#ffffff"
         format = "%content"
-        path = "~/.cache/f1/next_session"
+        path = "~/.cache/get-next-f1/next_session"
 }
 
 wireless _first_ {
