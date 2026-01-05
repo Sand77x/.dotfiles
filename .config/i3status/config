@@ -33,7 +33,7 @@ read_file F1 {
 read_file HELP {
         color_good = "#42f5aa"
         format = "%content"
-        path = "~/.help"
+        path = "~/.helpme"
 }
 
 wireless _first_ {
