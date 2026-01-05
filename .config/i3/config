@@ -49,16 +49,16 @@ $execnsi dunst
 $execnsi setxkbmap us -option caps:none
 
 # !! remember to install tuned service for battery saving
-# suspend after 4 minutes idle
+# start screensaver and suspend after 4 minutes idle
 $execnsi xautolock -time 4 -locker "systemctl suspend"
-# write to cache (I manage this)
-$execnsi sh -c 'echo " ON" > ~/.cache/xautolock_status'
+# write to cache for i3status
+$execnsi $runsh 'echo " ON" > ~/.cache/xautolock_status'
 
 # write f1 status to cache on startup
 $execnsi i3status-f1
 
-# Start feh for background
-$execnsi ~/.fehbg
+# Start feh for wallpaper
+$execalnsi feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpapers/normal.png"
 
 # make power button open custom power menu
 bindsym XF86PowerOff         $execnsi power-menu
@@ -67,7 +67,7 @@ bindsym XF86PowerOff         $execnsi power-menu
 bindsym XF86AudioRaiseVolume $execnsi $runsh 'pamixer -i 5                && $dify -i audio-volume-high  " Volume: $(pamixer --get-volume)%"'
 bindsym XF86AudioLowerVolume $execnsi $runsh 'pamixer -d 5                && $dify -i audio-volume-low   " Volume: $(pamixer --get-volume)%"'
 bindsym XF86AudioMute        $execnsi $runsh 'pamixer -t                  && $dify -i audio-volume-muted " Volume: $(pamixer --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)"'
-bindsym $mod+Shift+m         $execnsi $runsh 'pamixer --default-source -t && $dify -i audio-volume-muted " Mic: $(pamixer --default-source --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)"'
+bindsym $mod+m               $execnsi $runsh 'pamixer --default-source -t && $dify -i audio-volume-muted " Mic: $(pamixer --default-source --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)"'
 
 # using light to set brightness
 bindsym XF86MonBrightnessUp   $execnsi $runsh '$dify -i weather-clear       " Brightness: $(light -A 10 && light -G | cut -d. -f1)%"'
@@ -86,6 +86,10 @@ bindsym $mod+b       exec     brave-browser
 
 # emoji picker
 bindsym $mod+e       $execnsi dmenu-emoji
+
+# mouse keys binds
+bindsym $mod+q       $execnsi xdotool click 1
+bindsym $mod+Shift+q $execnsi sleep 0.1 && xdotool click --clearmodifiers 3 
 
 # start programs
 bindsym $mod+z       $execnsi i3-dmenu-desktop
@@ -121,7 +125,7 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+m layout toggle tabbed split
+bindsym $mod+t layout toggle tabbed split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle

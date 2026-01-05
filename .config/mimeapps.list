@@ -3,6 +3,7 @@ image/jpeg=sxiv.desktop
 image/png=sxiv.desktop
 text/plain=nvim.desktop
 application/pdf=sioyek.desktop
+x-scheme-handler/webcal=brave-browser.desktop
 
 [Added Associations]
 image/jpeg=sxiv.desktop;

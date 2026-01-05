@@ -119,26 +119,21 @@ alias v='nvim'
 alias xcl='sed -z "s/\n$//" | xclip -selection clipboard'
 alias lg='lazygit'
 alias ani='ani-cli --rofi'
-alias hisc="history | tac | awk '{\$1=\"\"; sub(/^ /,\"\"); print}' | fzf --no-sort --layout=reverse | xcl"
-alias list_sinks='pactl list sinks | grep -E "Active|Sink"'
-alias list_sources='pactl list sources | grep -E "Active|Source"'
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias sched='odoc s sched'
 alias blu='bluetoothctl'
 alias bb='brave-browser'
+alias latest='ls -t | head -n 1'
 
 # flatpaks
 alias discord='flatpak run com.discordapp.Discord'
 
-latf() {
-  local file
-  file=$(ls -t | head -n 1)
-  if [ $# -gt 0 ]; then
-    "$@" "$file"
-  else
-    echo "$file"
-  fi
+# execute command in history with fzf
+__hisc_fzf() {
+  cmd=$(fc -ln 1 | sed 's/\t//' | fzf --tac --no-sort --layout=reverse)
+  [ -n "$cmd" ] && eval "$cmd"
 }
+bind -x '"\C-r": __hisc_fzf'
 
 neofetch # run neofetch
 . "$HOME/.cargo/env"
