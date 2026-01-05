@@ -28,7 +28,7 @@ set $refresh_i3status killall -SIGUSR1 i3status
 set $ssdir       ~/Pictures/Screenshots
 
 # Start the compositor
-$execalnsi picom -b
+$execnsi picom -b
 
 # start policykit authentication agent
 $execnsi /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
@@ -59,6 +59,9 @@ $execnsi i3status-f1
 
 # Start feh for wallpaper
 $execalnsi feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpapers/normal.png"
+
+# for people using my laptop
+bindsym $mod+Shift+s $execnsi $dify "Use win+z to launch programs or win+b to launch browser"
 
 # make power button open custom power menu
 bindsym XF86PowerOff         $execnsi power-menu
@@ -96,7 +99,7 @@ bindsym $mod+z       $execnsi i3-dmenu-desktop
 bindsym $mod+Shift+z $execnsi dmenu_run
 
 # kill windows and processes
-bindsym $mod+w kill
+bindsym $mod+w       kill
 bindsym $mod+Shift+w $execnsi dmenu-pkill
 
 # change focus

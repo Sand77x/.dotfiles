@@ -76,7 +76,7 @@ local function in_git_repo()
 end
 
 if vim.fn.executable('lazygit') then
-    vim.keymap.set('n', '<leader>lg', function()
+    vim.keymap.set('n', '<leader>gs', function()
         if not in_git_repo() then
             print('Error: Not in a git repo!')
             return
@@ -637,12 +637,12 @@ require('lazy').setup(
             --- @type blink.cmp.Config
             opts = {
                 keymap = {
-                    ['<C-n>'] = { 'show', 'hide' },
+                    ['<Esc>'] = { 'hide' },
                     ['<CR>'] = { 'accept', 'fallback' },
                     ['<C-l>'] = { 'snippet_forward', 'fallback' },
                     ['<C-h>'] = { 'snippet_backward', 'fallback' },
-                    ['<S-Tab>'] = { 'select_prev', 'fallback' },
-                    ['<Tab>'] = { 'select_next', 'fallback' },
+                    ['<C-p>'] = { 'select_prev', 'fallback' },
+                    ['<C-n>'] = { 'show', 'select_next', 'fallback' },
                     ['<C-j>'] = { 'scroll_documentation_down', 'fallback' },
                     ['<C-k>'] = { 'scroll_documentation_up', 'fallback' },
                 },
@@ -652,6 +652,14 @@ require('lazy').setup(
                 },
 
                 cmdline = {
+                    completion = {
+                        list = {
+                            selection = {
+                                preselect = true,
+                                auto_insert = false,
+                            },
+                        },
+                    },
                     keymap = {
                         preset = 'inherit',
                     },

@@ -1,9 +1,9 @@
 #!/bin/bash
 
 odoc() {
-    local DEF_GREP_N=10
-    local DOCDIR="$HOME/odoc"
-    local HELP="
+    local def_grep_n=10
+    local docdir="$HOME/odoc"
+    local help="
 odoc <mode> [file] [args]
 a   Add new doc
 l   List docs
@@ -19,15 +19,15 @@ d   Delete doc
     editor=$(command -v nvim 2>/dev/null || echo nano)
 
     # Ensure docs directory exists
-    mkdir -p "$DOCDIR"
+    mkdir -p "$docdir"
 
     # Help / usage check
     if [ -z "$mode" ]; then
-        echo "$HELP"
+        echo "$help"
         return
     fi
 
-    local file="$DOCDIR/$arg.md"
+    local file="$docdir/$arg.md"
 
     case "${mode,,}" in 
         "a")
@@ -40,7 +40,7 @@ d   Delete doc
             ;;
 
         "l")
-            ls "$DOCDIR"
+            ls "$docdir"
             ;;
 
         "rn")
@@ -49,17 +49,17 @@ d   Delete doc
                 return
             fi
             local new_name="$3"
-            if [ -z "$new_name" ] || [ -e "$DOCDIR/$new_name.md" ]; then
+            if [ -z "$new_name" ] || [ -e "$docdir/$new_name.md" ]; then
                 echo "Invalid rename target. Provide a new name as the third argument."
                 return
             fi
-            mv "$file" "$DOCDIR/$new_name.md"
+            mv "$file" "$docdir/$new_name.md"
             echo "Doc renamed to: $new_name.md"
             ;;
 
         "s")
             if [ -z "$arg" ]; then
-                file="$DOCDIR/.scratch.md"
+                file="$docdir/.scratch.md"
                 [ ! -e "$file" ] && { echo "# scratch" > "$file"; }
                 cat "$file"
                 return
@@ -84,12 +84,12 @@ d   Delete doc
                 echo "Enter header to grep as 3rd arg."
                 return
             fi
-            grep "$3" -A "${4:-$DEF_GREP_N}" "$file"
+            grep "$3" -A "${4:-$def_grep_n}" "$file"
             ;;
 
         "e")
             if [ -z "$arg" ]; then
-                file="$DOCDIR/.scratch.md"
+                file="$docdir/.scratch.md"
                 [ ! -e "$file" ] && echo "# scratch" > "$file"
             fi
             "$editor" "$file"

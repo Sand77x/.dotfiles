@@ -1,30 +1,39 @@
 #!/bin/bash
-exec="$HOME/Projects/i3status/i3status-f1/get-next.sh"
-file="$HOME/.cache/get-next-f1/next_session"
+i3status-f1() {
+    local exec="$HOME/Projects/i3status/i3status-f1/get-next.sh"
+    local file="$HOME/.cache/get-next-f1/next_session"
 
-output="$($exec)"
-if [ "$output" = "Season done!" ]; then
-    echo "Race: $output" > "$file"
-    exit
-fi
+    local output="$($exec)"
+    if [ "$output" = "Season done!" ]; then
+        echo "Race: $output" > "$file"
+        exit
+    fi
 
-read loc sesh ts <<< "$output"
+    local ts="${output##* }"
+    local sesh="${output% *}"; sesh="${sesh##* }"
+    local loc="${output% * *}"
 
-now=$(date +%s)
-diff=$(( ts - now ))
-days=$(( diff / 86400 ))
-hours=$(( (diff % 86400) / 3600 ))
-mins=$(( (diff % 3600) / 60 ))
+    local diff=$(( ts - $(date +%s) ))
+    local days=$(( diff / 86400 ))
+    local hours=$(( (diff % 86400) / 3600 ))
+    local mins=$(( (diff % 3600) / 60 ))
 
-diff_str=""
-(( days > 0 )) && diff_str+="${days}d"
-(( hours > 0 )) && diff_str+="${hours}h"
-diff_str+="${mins}m"
+    local diff_str=""
+    (( days > 0 )) && diff_str+="${days}d"
+    (( hours > 0 )) && diff_str+="${hours}h"
+    diff_str+="${mins}m"
 
-content="Race: $loc in $diff_str ($sesh)"
+    # only first 4 chars
+    local loc_fmt="${loc//[[:space:]]/}"
+    loc_fmt="${loc_fmt:0:4}"
+    loc_fmt="${loc_fmt,,}"
+    local content="F1: ${loc_fmt^} $sesh ~$diff_str"
 
-if (( days <= 3 )); then
-    content="<span color=\"#ee8b2b\">$content</span>"
-fi
+    if (( days <= 3 )); then
+        content="<span color=\"#ee8b2b\">$content</span>"
+    fi
 
-echo "$content" > "$file"
+    echo "$content" > "$file"
+}
+
+i3status-f1

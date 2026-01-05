@@ -1,16 +1,19 @@
 #!/bin/bash
 
-CACHE="$HOME/.cache/xautolock_status"
+xautolock_cache="$HOME/.cache/xautolock_status"
+enabled_string="Saver:  ON"
+disabled_string="Saver: OFF"
+disabled_string_pango="<span color='#ee8b2b'>$disabled_string</span>"
 
 # make sure cache exists
-[ -f "$CACHE" ] || echo "OFF" > "$CACHE"
+[ -f "$xautolock_cache" ] || echo "$disabled_string_pango" > "$xautolock_cache"
 
-if [ "$(cat "$CACHE")" = " ON" ]; then
+if [ "$(cat "$xautolock_cache")" = "$enabled_string" ]; then
     xautolock -disable
-    echo "OFF" > "$CACHE"
-    dunstify -r 6767 -i system-lock-screen "Autolock: OFF"
+    echo "$disabled_string_pango" > "$xautolock_cache"
+    dunstify -r 6767 -i system-lock-screen "$disabled_string" 
 else
     xautolock -enable
-    echo " ON" > "$CACHE"
-    dunstify -r 6767 -i system-lock-screen "Autolock: ON"
+    echo "$enabled_string" > "$xautolock_cache"
+    dunstify -r 6767 -i system-lock-screen "$enabled_string" 
 fi
