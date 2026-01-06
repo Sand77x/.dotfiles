@@ -21,8 +21,12 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# set PATH so it includes user's private bin if it exists
+# set PATH so it includes user's private bin if it exists (recursive)
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
+    for dir in $(find "$HOME/.local/bin" -type d); do
+        PATH="$dir:$PATH"
+    done
 fi
+
 . "$HOME/.cargo/env"

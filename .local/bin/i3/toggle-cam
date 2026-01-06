@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if lsmod | grep -q '^uvcvideo'; then
+    sudo /sbin/modprobe -r uvcvideo
+    if lsmod | grep -q '^uvcvideo'; then
+        dunstify -r 6767 "Camera: IN USE"
+    else
+        dunstify -r 6767 "Camera: OFF"
+    fi
+else
+    sudo /sbin/modprobe uvcvideo
+    dunstify -r 6767 "Camera: ON"
+fi
+

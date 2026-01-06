@@ -1,7 +1,9 @@
 #!/bin/bash
+# for cron
+
 i3status-f1() {
     local exec="$HOME/Projects/i3status/i3status-f1/get-next.sh"
-    local file="$HOME/.cache/get-next-f1/next_session"
+    local file="$HOME/.cache/next_session"
 
     local output="$($exec)"
     if [ "$output" = "Season done!" ]; then

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+i3status-mic-cam() {
+    local on_identifier="*"
+    local off_identifier="-"
+    local cam_status
+    local mic_status
+
+    if lsmod | grep -q '^uvcvideo'; then
+        cam_status="$on_identifier"
+    else
+        cam_status="$off_identifier"
+    fi
+
+    if [ "$(pamixer --default-source --get-mute | grep false)" ]; then
+        mic_status="$on_identifier"
+    else
+        mic_status="$off_identifier"
+    fi
+
+    echo "Mic:${mic_status} Cam:${cam_status}" > ~/.cache/mic_cam_status
+}
+
+i3status-mic-cam

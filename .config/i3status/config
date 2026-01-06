@@ -7,15 +7,16 @@ general {
         interval = 5
 }
 
-order += "read_file HELP"
+order += "wireless _first_"
+# order += "read_file HELP"
 order += "read_file F1"
 # order += "disk /"
 order += "load"
 order += "cpu_temperature 0"
 order += "memory"
 order += "battery all"
+order += "read_file MIC_CAM"
 order += "read_file XAUTOLOCK_STATUS"
-order += "wireless _first_"
 order += "tztime local"
 
 read_file XAUTOLOCK_STATUS {
@@ -27,7 +28,13 @@ read_file XAUTOLOCK_STATUS {
 read_file F1 {
         color_good = "#ffffff"
         format = "%content"
-        path = "~/.cache/get-next-f1/next_session"
+        path = "~/.cache/next_session"
+}
+
+read_file MIC_CAM {
+        color_good = "#42f5aa"
+        format = "%content"
+        path = "~/.cache/mic_cam_status"
 }
 
 read_file HELP {
@@ -38,7 +45,7 @@ read_file HELP {
 
 wireless _first_ {
         # format_up = "Wlan: \"%essid\" %bitrate ip=%ip (no hack pls)"
-        format_up = "\"%essid\" (br %bitrate)"
+        format_up = "Wlan: \"%essid\" (br %bitrate)"
         format_down = "Wlan: down"
         format_bitrate = "%g %cbps"
         # format_quality = "%d%s"
