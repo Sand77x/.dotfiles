@@ -125,9 +125,9 @@ vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- QOL motion remaps
-vim.keymap.set({ 'n', 'v' }, 'H', '^')
-vim.keymap.set({ 'n', 'v' }, 'L', '$')
-vim.keymap.set({ 'n', 'v' }, 'q', '%')
+vim.keymap.set({ 'n', 'v', 'o' }, 'H', '^')
+vim.keymap.set({ 'n', 'v', 'o' }, 'L', '$')
+vim.keymap.set({ 'n', 'v', 'o' }, 'q', '%')
 
 -- Macro remap (I keep clicking it!!)
 vim.keymap.set('n', 'Q', 'q')
@@ -393,7 +393,7 @@ require('lazy').setup(
 
                         -- Execute a code action, usually your cursor needs to be on top of an error
                         -- or a suggestion from your LSP for this to activate.
-                        map('gca', vim.lsp.buf.code_action, 'Goto Code Action', { 'n', 'x' })
+                        map('gac', vim.lsp.buf.code_action, 'Goto Code Action', { 'n', 'x' })
 
                         -- Find references for the word under your cursor.
                         map('grr', require('telescope.builtin').lsp_references, 'Goto References')
@@ -425,12 +425,7 @@ require('lazy').setup(
                         map('grt', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
 
                         -- Show error in floating window
-                        vim.keymap.set(
-                            'n',
-                            '<C-e>',
-                            vim.diagnostic.open_float,
-                            { noremap = true, silent = true, buffer = event.buf }
-                        )
+                        map('<C-e>', vim.diagnostic.open_float, 'Show Error in Floating Window')
                     end,
                 })
 

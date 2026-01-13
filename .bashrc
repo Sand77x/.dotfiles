@@ -124,6 +124,7 @@ alias sched='odoc s sched'
 alias blu='bluetoothctl'
 alias bb='brave-browser'
 alias latest='ls -t | head -n 1'
+alias neverssl='open http://neverssl.com'
 
 # flatpaks
 alias discord='flatpak run com.discordapp.Discord'
