@@ -132,7 +132,7 @@ alias discord='flatpak run com.discordapp.Discord'
 # execute command in history with fzf
 __hisc_fzf() {
   cmd=$(fc -ln 1 | sed 's/\t//' | fzf --tac --no-sort --layout=reverse)
-  [ -n "$cmd" ] && eval "$cmd"
+  [ -n "$cmd" ] && echo "$cmd" | xcl && eval "$cmd"
 }
 bind -x '"\C-r": __hisc_fzf'
 

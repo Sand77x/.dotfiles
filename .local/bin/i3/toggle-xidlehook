@@ -1,0 +1,23 @@
+#!/bin/bash
+
+cache_file="$HOME/.cache/xidlehook_status"
+socket="/var/tmp/xidlehook.sock"
+
+query="$(xidlehook-client --socket "$socket" query 2>&1)"
+
+if grep -q "kind: NotFound" <<< "$query"; then
+    echo "<span color='#ee8b2b'>Saver: NR</span>" > "$cache_file"
+    dunstify -r 6767 -i system-lock-screen "Saver: NOT RUNNING"
+    exit 0
+fi
+
+if grep -q "disabled: true" <<< "$query"; then
+    echo "Saver:  ON" > "$cache_file"
+    xidlehook-client --socket "$socket" control --action enable
+    xidlehook-client --socket "$socket" reset-idle
+    dunstify -r 6767 -i system-lock-screen "Saver:  ON"
+else
+    echo "<span color='#ee8b2b'>Saver: OFF</span>" > "$cache_file"
+    xidlehook-client --socket "$socket" control --action disable
+    dunstify -r 6767 -i system-lock-screen "Saver: OFF"
+fi

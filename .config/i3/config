@@ -49,15 +49,12 @@ $execnsi dunst
 $execnsi setxkbmap us -option caps:none
 
 # !! remember to install tuned service for battery saving
-# start screensaver and suspend after 4 minutes idle
-$execnsi xautolock -time 4 -locker "systemctl suspend"
-# write to cache for i3status
-$execalnsi xautolock -enable
-$execalnsi $runsh 'echo "Saver:  ON" > ~/.cache/xautolock_status'
+# start xidlehook https://github.com/jD91mZM2/xidlehook
+$execnsi my-xidlehook
 
 # write cache on startup for i3status
 $execalnsi i3status-f1
-$execnsi i3status-mic-cam
+$execnsi   i3status-mic-cam
 
 # Start feh for wallpaper
 $execnsi feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpapers/normal.png"
@@ -82,8 +79,8 @@ bindsym $mod+c               $execnsi $runsh 'toggle-cam && i3status-mic-cam && 
 bindsym XF86MonBrightnessUp   $execnsi $runsh '$dify -i weather-clear       " Brightness: $(light -A 10 && light -G | cut -d. -f1)%"'
 bindsym XF86MonBrightnessDown $execnsi $runsh '$dify -i weather-clear-night " Brightness: $(light -U 10 && light -G | cut -d. -f1)%"'
 
-# enable / disable xautolock
-bindsym $mod+o       $execnsi toggle-xautolock && $refresh_i3status
+# enable / disable xidlehook
+bindsym $mod+o       $execnsi toggle-xidlehook && $refresh_i3status
 
 # exec applications
 bindsym Shift+Print  $execnsi flameshot gui  -c -p $ssdir

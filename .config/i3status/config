@@ -16,13 +16,13 @@ order += "cpu_temperature 0"
 order += "memory"
 order += "battery all"
 order += "read_file MIC_CAM"
-order += "read_file XAUTOLOCK_STATUS"
+order += "read_file SCREEN_SAVER"
 order += "tztime local"
 
-read_file XAUTOLOCK_STATUS {
+read_file SCREEN_SAVER {
         color_good = "#ffffff"
         format = "%content"
-        path = "~/.cache/xautolock_status"
+        path = "~/.cache/xidlehook_status"
 }
 
 read_file F1 {
