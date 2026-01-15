@@ -9,7 +9,7 @@ choice=$(echo -e "$options" | dmenu -i)
 # Act based on selection
 case "$choice" in
     "Suspend")
-        systemctl suspend
+        i3lock-cool && systemctl suspend
         ;;
     "Lock")
         i3lock-cool

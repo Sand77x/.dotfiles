@@ -18,5 +18,5 @@ xidlehook \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; i3lock-cool' \
     '' \
   --timer 240 \
-    'systemctl suspend' \
+    'i3lock-cool && systemctl suspend' \
     ''

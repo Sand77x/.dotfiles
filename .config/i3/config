@@ -40,7 +40,7 @@ $execnsi xset -dpms
 # !! remember to edit /etc/systemd/logind.conf to override power button and lid switches
 # !! remember to install i3lock-color https://github.com/Raymo111/i3lock-color/
 # use xss-lock to lock screen right before suspend call via systemctl suspend
-$execnsi xss-lock --transfer-sleep-lock -- i3lock-cool
+# $execnsi xss-lock --transfer-sleep-lock -- i3lock-cool
 
 # Start the notification daemon
 $execnsi dunst
@@ -51,6 +51,7 @@ $execnsi setxkbmap us -option caps:none
 # !! remember to install tuned service for battery saving
 # start xidlehook https://github.com/jD91mZM2/xidlehook
 $execnsi my-xidlehook
+$execnsi $runsh "sleep 1 && toggle-xidlehook check && $refresh_i3status"
 
 # write cache on startup for i3status
 $execalnsi i3status-f1
