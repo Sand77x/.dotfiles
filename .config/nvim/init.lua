@@ -94,9 +94,7 @@ else
 end
 
 -- Remap Esc
-vim.keymap.set('i', '<C-c>', '<Esc>', { noremap = true })
-vim.keymap.set('n', '<C-c>', '<Esc>', { noremap = true })
-vim.keymap.set('v', '<C-c>', '<Esc>', { noremap = true })
+vim.keymap.set({ 'i', 'n', 'v' }, '<C-c>', '<Esc>', { noremap = true })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -181,11 +179,11 @@ vim.keymap.set('n', '<leader>L', '<C-w>L', { desc = 'Move split to the right' })
 vim.keymap.set('n', '<leader>J', '<C-w>J', { desc = 'Move split to the lower' })
 vim.keymap.set('n', '<leader>K', '<C-w>K', { desc = 'Move split to the upper' })
 
-vim.keymap.set('n', '<C-j>', function()
+vim.keymap.set({ 'n', 'v' }, '<C-j>', function()
     return (vim.v.count > 0 and vim.v.count * 5 or 5) .. 'j'
 end, { expr = true })
 
-vim.keymap.set('n', '<C-k>', function()
+vim.keymap.set({ 'n', 'v' }, '<C-k>', function()
     return (vim.v.count > 0 and vim.v.count * 5 or 5) .. 'k'
 end, { expr = true })
 
@@ -803,13 +801,13 @@ require('lazy').setup(
         },
         {
             'Sand77x/leree.nvim',
-            keys = {
-                { '<tab>', '<cmd>Leree<CR>', desc = 'Leree: Update marks', mode = { 'n', 'v' } },
-            },
+            -- dir = '~/Projects/nvim/leree.nvim/',
             opts = {
                 v_off = 5,
                 h_off = 20,
                 interval = 3,
+                show_on = {},
+                toggle_on = { '<CR>' },
             },
         },
 
