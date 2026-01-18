@@ -363,6 +363,7 @@ require('lazy').setup(
         {
             -- Main LSP Configuration
             'neovim/nvim-lspconfig',
+            version = '2.3',
             dependencies = {
                 -- Mason must be loaded before its dependents so we need to set it up here.
                 { 'mason-org/mason.nvim', opts = {}, version = 'v1.*' },
@@ -536,6 +537,7 @@ require('lazy').setup(
                             -- certain features of an LSP (for example, turning off formatting for ts_ls)
                             server.capabilities =
                                 vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+
                             require('lspconfig')[server_name].setup(server)
                         end,
                     },
@@ -703,8 +705,10 @@ require('lazy').setup(
                 snippets = { preset = 'luasnip' },
 
                 fuzzy = {
+                    frecency = {
+                        enabled = true,
+                    },
                     implementation = 'lua',
-                    use_frecency = true,
                     use_proximity = true,
                 },
 
@@ -750,9 +754,6 @@ require('lazy').setup(
             config = function()
                 -- Better Around/Inside textobjects
                 require('mini.ai').setup({ n_lines = 500 })
-
-                -- Add/delete/replace surroundings (brackets, quotes, etc.)
-                require('mini.surround').setup({ silent = true })
 
                 -- Simple and easy statusline.
                 local statusline = require('mini.statusline')

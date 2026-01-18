@@ -117,23 +117,4 @@ return {
             filesize = 1,
         },
     },
-    {
-        'yilisharcs/cme.nvim',
-        specs = {
-            {
-                'https://github.com/nvim-lualine/lualine.nvim',
-                optional = true,
-                -- Fixes the small delay on `on_exit` updates
-                opts = { options = { refresh = { statusline = 16 } } },
-            },
-        },
-        config = function()
-            vim.g.cme = {
-                -- Preferred user shell. Accepts any executor that supports -c.
-                shell = vim.o.shell,
-                -- Expand '%' to the current file name.
-                shell_expand = true,
-            }
-        end,
-    },
 }
