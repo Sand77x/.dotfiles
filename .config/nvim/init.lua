@@ -842,4 +842,5 @@ require('lazy').setup(
     }
 )
 
-vim.cmd.colorscheme('conifer')
+-- [[ Colorscheme ]]
+vim.cmd.colorscheme('vague')

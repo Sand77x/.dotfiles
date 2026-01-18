@@ -7,10 +7,6 @@ keybinding:
     prevTab: h
     nextItem-alt: j
     prevItem-alt: k
-    prevBlock-alt: <c-k>
-    nextBlock-alt: <c-j>
-    scrollUpMain-alt1: <disabled>
-    scrollDownMain-alt1: <disabled>
-  commits:
-    moveDownCommit: J
-    moveUpCommit: K
+    scrollUpMain-alt1: u
+    scrollDownMain-alt1: d
+    focusMainView: "<tab>"
