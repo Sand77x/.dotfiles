@@ -11,12 +11,12 @@ xidlehook \
   --socket '/var/tmp/xidlehook.sock' \
   --not-when-fullscreen \
   --not-when-audio \
-  --timer 60 \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness .2' \
+  --timer 120 \
+    'xrandr --output "$PRIMARY_DISPLAY" --brightness .4' \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
-  --timer 180 \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; i3lock-cool' \
-    '' \
-  --timer 240 \
-    'i3lock-cool && systemctl suspend' \
-    ''
+  --timer 30 \
+    '! pgrep i3lock >/dev/null && i3lock-cool' \
+    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
+  --timer 120 \
+    'systemctl suspend' \
+    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \

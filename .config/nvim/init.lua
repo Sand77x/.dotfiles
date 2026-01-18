@@ -13,7 +13,7 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
 vim.o.number = true
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -171,15 +171,23 @@ vim.keymap.set('n', '<leader>vh', ':split<CR>')
 vim.keymap.set('n', '<leader>vo', ':only<CR>')
 
 -- Split navigation
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<leader>h', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<leader>l', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<leader>j', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<leader>k', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 vim.keymap.set('n', '<leader>H', '<C-w>H', { desc = 'Move split to the left' })
 vim.keymap.set('n', '<leader>L', '<C-w>L', { desc = 'Move split to the right' })
 vim.keymap.set('n', '<leader>J', '<C-w>J', { desc = 'Move split to the lower' })
 vim.keymap.set('n', '<leader>K', '<C-w>K', { desc = 'Move split to the upper' })
+
+vim.keymap.set('n', '<C-j>', function()
+    return (vim.v.count > 0 and vim.v.count * 5 or 5) .. 'j'
+end, { expr = true })
+
+vim.keymap.set('n', '<C-k>', function()
+    return (vim.v.count > 0 and vim.v.count * 5 or 5) .. 'k'
+end, { expr = true })
 
 -- Split resizing
 vim.keymap.set('n', '<A-h>', '<C-w><', { desc = 'Move split to the left' })
@@ -426,6 +434,9 @@ require('lazy').setup(
 
                         -- Show error in floating window
                         map('<C-e>', vim.diagnostic.open_float, 'Show Error in Floating Window')
+
+                        -- Hover
+                        map('K', vim.lsp.buf.hover, 'Hover Symbol')
                     end,
                 })
 
@@ -788,6 +799,17 @@ require('lazy').setup(
                     additional_vim_regex_highlighting = { 'ruby' },
                 },
                 indent = { enable = true, disable = { 'ruby' } },
+            },
+        },
+        {
+            'Sand77x/leree.nvim',
+            keys = {
+                { '<tab>', '<cmd>Leree<CR>', desc = 'Leree: Update marks', mode = { 'n', 'v' } },
+            },
+            opts = {
+                v_off = 5,
+                h_off = 20,
+                interval = 3,
             },
         },
 
