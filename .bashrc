@@ -126,6 +126,10 @@ alias bb='brave-browser'
 alias latest='ls -t | head -n 1'
 alias neverssl='open http://neverssl.com'
 
+# git
+alias gs='git status'
+alias gd='git dog'
+
 # flatpaks
 alias discord='flatpak run com.discordapp.Discord'
 
