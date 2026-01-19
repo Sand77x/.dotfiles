@@ -3,22 +3,33 @@
 i3status-mic-cam() {
     local on_identifier="*"
     local off_identifier="-"
+    local normal_color="#f2eb22"
+    local bad_color="#ffffff"
+    local cam_color
+    local mic_color
     local cam_status
     local mic_status
 
     if lsmod | grep -q '^uvcvideo'; then
         cam_status="$on_identifier"
+        cam_color="$bad_color"
     else
         cam_status="$off_identifier"
+        cam_color="$normal_color"
     fi
 
     if [ "$(pamixer --default-source --get-mute | grep false)" ]; then
         mic_status="$on_identifier"
+        mic_color="$bad_color"
     else
         mic_status="$off_identifier"
+        mic_color="$normal_color"
     fi
 
-    echo "Mic:${mic_status} Cam:${cam_status}" > ~/.cache/mic_cam_status
+    local text="<span color=\"${mic_color}\">Mic:${mic_status}</span> \
+<span color=\"${cam_color}\">Cam:${cam_status}</span>"
+
+    echo "$text" > ~/.cache/mic_cam_status
 }
 
 i3status-mic-cam

@@ -57,9 +57,10 @@ ethernet _first_ {
 }
 
 battery all {
+        color_good = "#58ed3f"
         last_full_capacity = true
         integer_battery_capacity = true
-        format = "<span color='#42f5aa'>Bat: %percentage</span> -%status- (est %remaining)"
+        format = "Bat: <span color=\"#f285e0\">%percentage</span> -%status- (est %remaining)"
         low_threshold = 30
         threshold_type = "percentage"
         status_chr = "CHR"
@@ -87,7 +88,7 @@ memory {
 }
 
 tztime local {
-        format = "<span color='#42f5aa'>%H:%M %Z @ %a %m/%d/%y</span>"
+        format = "<span color=\"#f285e0\">%H:%M</span> %Z @ %a %m/%d/%y"
 }
 
 # vim: ft=bash

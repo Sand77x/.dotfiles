@@ -8,7 +8,7 @@ query="$(xidlehook-client --socket "$socket" query 2>&1)"
 
 # Not running
 not_running() {
-    echo "<span color='#ee8b2b'>Saver: NR</span>" > "$cache"
+    echo "<span color='#f2eb22'>Saver: NR</span>" > "$cache"
     [[ -z "$arg" ]] && dunstify -r 6767 -i system-lock-screen "Saver: NOT RUNNING"
     exit 0
 }
@@ -23,7 +23,7 @@ set_on() {
 
 # Turn OFF
 set_off() {
-    echo "<span color='#ee8b2b'>Saver: OFF</span>" > "$cache"
+    echo "<span color='#f2eb22'>Saver: OFF</span>" > "$cache"
     [[ -z "$arg" ]] && dunstify -r 6767 -i system-lock-screen "Saver: OFF"
     xidlehook-client --socket "$socket" control --action disable 2>/dev/null
 }
