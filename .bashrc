@@ -115,6 +115,10 @@ if ! shopt -oq posix; then
 fi
 
 # ============= End of defaults ==============
+
+# extra functions
+. "$HOME/.local/bin/bash/acd_func.sh"
+
 alias v='nvim'
 alias xcl='sed -z "s/\n$//" | xclip -selection clipboard'
 alias lg='lazygit'
@@ -140,10 +144,11 @@ __hisc_fzf() {
 }
 bind -x '"\C-r": __hisc_fzf'
 
-neofetch # run neofetch
+# cargo binaries
 . "$HOME/.cargo/env"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+neofetch # run neofetch
