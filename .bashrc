@@ -131,8 +131,9 @@ alias latest='ls -t | head -n 1'
 alias neverssl='open http://neverssl.com'
 
 # git
-alias gs='git status'
-alias gd='git dog'
+alias gst='git status'
+alias gdo='git dog'
+alias gdi='git diff'
 
 # flatpaks
 alias discord='flatpak run com.discordapp.Discord'

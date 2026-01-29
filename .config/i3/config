@@ -48,6 +48,10 @@ $execnsi dunst
 # set keyboard layout (disable caps lock)
 $execnsi setxkbmap us -option caps:none
 
+# !! remember to install udiskie
+# Start udiskie for automounting usbs
+$execnsi udiskie
+
 # !! remember to install tuned service for battery saving
 # start xidlehook https://github.com/jD91mZM2/xidlehook
 $execnsi my-xidlehook
@@ -61,7 +65,7 @@ $execnsi   i3status-mic-cam
 $execnsi feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpapers/normal.png"
 
 # for people using my laptop
-bindsym $mod+Shift+s $execnsi $runsh '$dify "HELP" "win+z to launch programs\nwin+b to launch browser\nwin+enter to launch terminal"'
+bindsym $mod+Shift+s $execnsi $runsh '$dify "HELP" "win+z to launch programs\nwin+w to close programs\nwin+b to launch browser\nwin+enter to launch terminal"'
 
 # make power button open custom power menu
 bindsym XF86PowerOff         $execnsi power-menu

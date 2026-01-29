@@ -8,7 +8,7 @@ general {
 }
 
 order += "wireless _first_"
-# order += "read_file HELP"
+order += "read_file HELP"
 order += "read_file F1"
 # order += "disk /"
 order += "load"
@@ -38,7 +38,7 @@ read_file MIC_CAM {
 }
 
 read_file HELP {
-        color_good = "#42f5aa"
+        color_good = "#a8bcf0"
         format = "%content"
         path = "~/.helpme"
 }
@@ -60,7 +60,8 @@ battery all {
         color_good = "#58ed3f"
         last_full_capacity = true
         integer_battery_capacity = true
-        format = "Bat: <span color=\"#f285e0\">%percentage</span> -%status- (est %remaining)"
+        # format = "Bat: <span color=\"#f285e0\">%percentage</span> -%status- (est %remaining)"
+        format = "Bat: <span color=\"#a8bcf0\">%percentage</span> -%status-"
         low_threshold = 30
         threshold_type = "percentage"
         status_chr = "CHR"
@@ -88,7 +89,7 @@ memory {
 }
 
 tztime local {
-        format = "<span color=\"#f285e0\">%H:%M</span> %Z @ %a %m/%d/%y"
+        format = "<span color=\"#a8bcf0\">%H:%M</span> %Z @ %a %m/%d/%y"
 }
 
 # vim: ft=bash
