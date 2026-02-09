@@ -73,12 +73,14 @@ bindsym XF86PowerOff         $execnsi power-menu
 # using pamixer to set volume
 bindsym XF86AudioRaiseVolume $execnsi $runsh 'pamixer --allow-boost -i 5  && $dify -i audio-volume-high  " Volume: $(pamixer --get-volume)%"'
 bindsym XF86AudioLowerVolume $execnsi $runsh 'pamixer --allow-boost -d 5  && $dify -i audio-volume-low   " Volume: $(pamixer --get-volume)%"'
-bindsym XF86AudioMute        $execnsi $runsh 'pamixer -t                  && $dify -i audio-volume-muted " Volume: $(pamixer --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)"'
+bindsym XF86AudioMute        $execnsi $runsh 'pamixer -t                  && $dify -i audio-volume-muted " Volume: $(pamixer --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
 bindsym $mod+m               $execnsi $runsh 'pamixer --default-source -t && $dify -i audio-volume-muted " Mic: $(pamixer --default-source --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
 
 # enable / disable video
 # !! remember to add to sudoers file user ALL=(root) NOPASSWD: /sbin/modprobe
 bindsym $mod+c               $execnsi $runsh 'toggle-cam && i3status-mic-cam && $refresh_i3status'
+# close cam by default
+$execnsi $runsh 'sudo /sbin/modprobe -r uvcvideo && sleep 1 && i3status-mic-cam'
 
 # using light to set brightness
 bindsym XF86MonBrightnessUp   $execnsi $runsh '$dify -i weather-clear       " Brightness: $(light -A 10 && light -G | cut -d. -f1)%"'
@@ -94,6 +96,9 @@ bindsym $mod+a       $execnsi boomer
 bindsym $mod+v       $execnsi dmenu-watch
 bindsym $mod+Return  exec     alacritty --working-directory ~
 bindsym $mod+b       exec     brave-browser
+
+# custom "action" macro basically in ~/.local/bin/custom
+bindsym $mod+space exec custom
 
 # emoji picker
 bindsym $mod+e       $execnsi dmenu-emoji
@@ -139,10 +144,10 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+t layout toggle tabbed split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+Tab floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Tab focus mode_toggle
 
 # create splits
 # bindsym $mod+h split h

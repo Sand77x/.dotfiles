@@ -8,7 +8,7 @@ general {
 }
 
 order += "wireless _first_"
-order += "read_file HELP"
+# order += "read_file HELP"
 order += "read_file F1"
 # order += "disk /"
 order += "load"
