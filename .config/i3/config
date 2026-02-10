@@ -62,7 +62,7 @@ $execalnsi i3status-f1
 $execnsi   i3status-mic-cam
 
 # Start feh for wallpaper
-$execnsi feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpapers/normal.png"
+$execnsi feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpapers/exit8.png"
 
 # for people using my laptop
 bindsym $mod+Shift+s $execnsi $runsh '$dify "HELP" "win+z to launch programs\nwin+w to close programs\nwin+b to launch browser\nwin+enter to launch terminal"'
@@ -98,7 +98,9 @@ bindsym $mod+Return  exec     alacritty --working-directory ~
 bindsym $mod+b       exec     brave-browser
 
 # custom "action" macro basically in ~/.local/bin/custom
-bindsym $mod+space exec custom
+bindsym $mod+space exec custom1
+bindsym $mod+Left  exec custom2
+bindsym $mod+Right exec custom3
 
 # emoji picker
 bindsym $mod+e       $execnsi dmenu-emoji
@@ -121,10 +123,10 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-bindsym $mod+Left  focus left
-bindsym $mod+Down  focus down
-bindsym $mod+Up    focus up
-bindsym $mod+Right focus right
+# bindsym $mod+Left  focus left
+# bindsym $mod+Down  focus down
+# bindsym $mod+Up    focus up
+# bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h     move left
@@ -132,10 +134,10 @@ bindsym $mod+Shift+j     move down
 bindsym $mod+Shift+k     move up
 bindsym $mod+Shift+l     move right
 
-bindsym $mod+Shift+Left  move left
-bindsym $mod+Shift+Down  move down
-bindsym $mod+Shift+Up    move up
-bindsym $mod+Shift+Right move right
+# bindsym $mod+Shift+Left  move left
+# bindsym $mod+Shift+Down  move down
+# bindsym $mod+Shift+Up    move up
+# bindsym $mod+Shift+Right move right
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
