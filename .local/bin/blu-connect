@@ -1,0 +1,22 @@
+#!/bin/bash
+
+bluetoothctl disconnect
+
+# Fail if no argument given
+if [ -z "$1" ]; then
+  echo "Usage: $0 <device name substring>"
+  exit 1
+fi
+
+dev=$(bluetoothctl devices | awk -v q="$1" 'tolower($0) ~ tolower(q) { print $2; exit }')
+
+# Fail if no match found
+if [ -z "$dev" ]; then
+  echo "No Bluetooth device found matching: $1"
+  exit 1
+fi
+
+echo "Connecting to $dev..."
+bluetoothctl connect "$dev" || exit 1
+
+# pactl set-default-sink 4

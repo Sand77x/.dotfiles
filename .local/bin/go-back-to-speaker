@@ -1,4 +1,0 @@
-#!/bin/bash
-
-set -e
-bluetoothctl disconnect "$(bluetoothctl devices | grep Galaxy | awk '{print $2}')"

@@ -1,4 +1,0 @@
-#!/bin/bash
-
-bluetoothctl connect 40:5E:F6:2E:06:3C
-pactl set-default-sink 4
