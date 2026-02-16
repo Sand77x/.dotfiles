@@ -4,7 +4,7 @@ cache="$HOME/.cache/xidlehook_status"
 [ -f "$cache" ] || echo "Saver:  ON" > "$cache"
 
 # Only exported variables can be used within the timer's command.
-export PRIMARY_DISPLAY="$(xrandr | awk '/ primary/{print $1}')"
+export PRIMARY_DISPLAY="$(xrandr | awk '/ connected/{print $1; exit}')"
 
 # Run xidlehook
 xidlehook \
