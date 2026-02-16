@@ -10,7 +10,8 @@ cache="$cachedir/dmenu_run"
 [ ! -e "$cachedir" ] && mkdir -p "$cachedir"
 
 IFS=:
-if find $PATH -type f -executable -newer "$cache" 2>/dev/null | grep -q .; then
+if [ ! -f "$cache" ] || \
+   find $PATH -type f -executable -newer "$cache" 2>/dev/null | grep -q .; then
     stest -flx $PATH | sort -u | tee "$cache"
 else
     cat "$cache"

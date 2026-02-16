@@ -1,6 +1,12 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 # Modified by: Rendell Ngo
 
+# for fresh installs, add this to your git config
+# git config --local status.showUntrackedFiles no
+
+# for wifi issues, find driver for your network controller
+# Ex. for rlt8852ce, use https://github.com/a5a5aa555oo/rtw89
+
 # set super key as modifier
 set $mod Mod4
 
@@ -11,7 +17,7 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
-# !! remember to get noto color for emojis
+# !! remember to get noto color for emojis https://fonts.google.com/noto/specimen/Noto+Color+Emoji
 # !! remember to install lxappearance for theming
 # font for window titles, can be overriden in the bar {} block below.
 # font pango:monospace 11
@@ -23,6 +29,10 @@ set $execalnsi        exec_always --no-startup-id
 set $dify             dunstify -r 6767
 set $runsh            sh -c
 set $refresh_i3status killall -SIGUSR1 i3status
+
+# for external i3status stuff
+# F1 next race tracker: install https://github.com/Sand77x/get-next-f1
+# add to crontab: */5 * * * * /home/{user}/.local/bin/i3status/i3status-f1
 
 # directory and file vars
 set $ssdir       ~/Pictures/Screenshots
@@ -54,6 +64,7 @@ $execnsi udiskie
 
 # !! remember to install tuned service for battery saving
 # start xidlehook https://github.com/jD91mZM2/xidlehook
+# get custom i3lock here https://github.com/Raymo111/i3lock-color
 $execnsi my-xidlehook
 $execnsi $runsh "sleep 1 && toggle-xidlehook check && $refresh_i3status"
 
@@ -95,6 +106,10 @@ bindsym Print        $execnsi flameshot full -c -p $ssdir
 bindsym $mod+a       $execnsi boomer
 bindsym $mod+v       $execnsi dmenu-watch
 bindsym $mod+Return  exec     alacritty --working-directory ~
+
+# !! remember to change these keybinds
+# disable C-n, C-p
+# rebind C-d, C-e, C-h, C-l, C-j, C-k
 bindsym $mod+b       exec     brave-browser
 
 # custom "action" macro basically in ~/.local/bin/custom

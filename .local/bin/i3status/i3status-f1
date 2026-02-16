@@ -2,7 +2,7 @@
 # for cron
 
 i3status-f1() {
-    local exec="$HOME/Projects/i3status/i3status-f1/get-next.sh"
+    local exec="$HOME/Projects/i3status/get-next-f1/get-next.sh"
     local file="$HOME/.cache/next_session"
 
     local output="$($exec)"
