@@ -79,9 +79,7 @@ load {
 cpu_temperature 0 {
         format = "Temp: %degrees°C"
         max_threshold = 70
-        # uncomment which one you use
-        # path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input"
-        path = "/sys/class/hwmon/hwmon5/temp1_input"
+        path = "/sys/class/hwmon/hwmon3/temp1_input"
 }
 
 memory {
