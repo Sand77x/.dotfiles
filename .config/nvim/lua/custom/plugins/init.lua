@@ -30,7 +30,7 @@ return {
         'ggandor/leap.nvim',
         keys = {
             {
-                '<s-tab>',
+                '<CR>',
                 function()
                     require('leap').leap({ target_windows = { vim.fn.win_getid() } })
                 end,

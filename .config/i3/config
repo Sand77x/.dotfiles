@@ -72,20 +72,23 @@ $execnsi $runsh "sleep 1 && toggle-xidlehook check && $refresh_i3status"
 $execalnsi i3status-f1
 $execnsi   i3status-mic-cam
 
-# Start feh for wallpaper
-$execnsi feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpapers/exit8.png"
-
 # for people using my laptop
 bindsym $mod+Shift+s $execnsi $runsh '$dify "HELP" "win+z to launch programs\nwin+w to close programs\nwin+b to launch browser\nwin+enter to launch terminal"'
 
 # make power button open custom power menu
 bindsym XF86PowerOff         $execnsi power-menu
+bindsym $mod+F12             $execnsi power-menu
 
 # using pamixer to set volume
 bindsym XF86AudioRaiseVolume $execnsi $runsh 'pamixer --allow-boost -i 5  && $dify -i audio-volume-high  " Volume: $(pamixer --get-volume)%"'
 bindsym XF86AudioLowerVolume $execnsi $runsh 'pamixer --allow-boost -d 5  && $dify -i audio-volume-low   " Volume: $(pamixer --get-volume)%"'
 bindsym XF86AudioMute        $execnsi $runsh 'pamixer -t                  && $dify -i audio-volume-muted " Volume: $(pamixer --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
 bindsym $mod+m               $execnsi $runsh 'pamixer --default-source -t && $dify -i audio-volume-muted " Mic: $(pamixer --default-source --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
+
+# for non-laptops
+bindsym $mod+F10 $execnsi $runsh 'pamixer --allow-boost -d 5  && $dify -i audio-volume-low   " Volume: $(pamixer --get-volume)%"'
+bindsym $mod+F11 $execnsi $runsh 'pamixer --allow-boost -i 5  && $dify -i audio-volume-high  " Volume: $(pamixer --get-volume)%"'
+bindsym $mod+F9  $execnsi $runsh 'pamixer -t                  && $dify -i audio-volume-muted " Volume: $(pamixer --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
 
 # enable / disable video
 # !! remember to add to sudoers file user ALL=(root) NOPASSWD: /sbin/modprobe
@@ -288,5 +291,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# exec extra local configuration
+$execnsi ~/.local-i3
 
 # vim: set ft=sh:

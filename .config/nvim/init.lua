@@ -800,17 +800,6 @@ require('lazy').setup(
                 indent = { enable = true, disable = { 'ruby' } },
             },
         },
-        {
-            'Sand77x/leree.nvim',
-            -- dir = '~/Projects/nvim/leree.nvim/',
-            opts = {
-                v_off = 5,
-                h_off = 20,
-                interval = 3,
-                show_on = {},
-                toggle_on = { '<CR>' },
-            },
-        },
 
         -- Kickstart default plugins
         require('kickstart.plugins.debug'),
@@ -844,4 +833,4 @@ require('lazy').setup(
 )
 
 -- [[ Colorscheme ]]
-vim.cmd.colorscheme('vague')
+vim.cmd.colorscheme('conifer')
