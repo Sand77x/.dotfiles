@@ -1,0 +1,7 @@
+[global]
+    font = Monospace 12
+    icon_theme = gnome
+    enable_recursive_icon_lookup = true
+
+[urgency_critical]
+    timeout = 10
