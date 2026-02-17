@@ -97,18 +97,25 @@ bindsym $mod+c               $execnsi $runsh 'toggle-cam && i3status-mic-cam && 
 $execnsi $runsh 'sudo /sbin/modprobe -r uvcvideo && sleep 1 && i3status-mic-cam'
 
 # using light to set brightness
-bindsym XF86MonBrightnessUp   $execnsi $runsh '$dify -i weather-clear       " Brightness: $(light -A 10 && light -G | cut -d. -f1)%"'
-bindsym XF86MonBrightnessDown $execnsi $runsh '$dify -i weather-clear-night " Brightness: $(light -U 10 && light -G | cut -d. -f1)%"'
+bindsym XF86MonBrightnessUp   $execnsi $runsh '$dify -i weather-clear " Brightness: $(light -A 10 && light -G | cut -d. -f1)%"'
+bindsym XF86MonBrightnessDown $execnsi $runsh '$dify -i weather-clear " Brightness: $(light -U 10 && light -G | cut -d. -f1)%"'
+
+# use randxr for PCs
+bindsym $mod+F1 $execnsi $runsh '$dify -i weather-clear " Brightness: $(bright -)"'
+bindsym $mod+F2 $execnsi $runsh '$dify -i weather-clear " Brightness: $(bright +)"'
 
 # enable / disable xidlehook
 bindsym $mod+o       $execnsi toggle-xidlehook && $refresh_i3status
 
 # exec applications
-bindsym Shift+Print  $execnsi flameshot gui  -c -p $ssdir
-bindsym Print        $execnsi flameshot full -c -p $ssdir
+bindsym Shift+Print  $execnsi flameshot gui  -r -p $ssdir | xclip -selection clipboard -t image/png
+bindsym Print        $execnsi flameshot full -r -p $ssdir | xclip -selection clipboard -t image/png
 bindsym $mod+a       $execnsi boomer
 bindsym $mod+v       $execnsi dmenu-watch
 bindsym $mod+Return  exec     alacritty --working-directory ~
+
+bindsym $mod+Shift+F8  $execnsi flameshot gui  -r -p $ssdir | xclip -selection clipboard -t image/png
+bindsym $mod+F8        $execnsi flameshot full -r -p $ssdir | xclip -selection clipboard -t image/png
 
 # !! remember to change these keybinds
 # disable C-n, C-p
