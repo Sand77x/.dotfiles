@@ -9,7 +9,7 @@ return {
             -- lint.linters_by_ft['dockerfile'] = { 'hadolint' }
             -- lint.linters_by_ft['inko'] = { 'inko' }
             -- lint.linters_by_ft['janet'] = { 'janet' }
-            lint.linters_by_ft['json'] = { 'jsonlint' }
+            lint.linters_by_ft['json'] = { 'eslint' }
             lint.linters_by_ft['markdown'] = nil
             -- lint.linters_by_ft['rst'] = { 'vale' }
             -- lint.linters_by_ft['ruby'] = { 'ruby' }

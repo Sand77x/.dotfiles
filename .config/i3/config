@@ -205,11 +205,11 @@ set $ws10 "10"
 
 # assign programs to workspaces
 for_window [class="Brave-browser"]            move container to workspace $ws1; workspace $ws1
-for_window [class="Xfce4-terminal|Alacritty"] move container to workspace $ws3; workspace $ws3
 for_window [class="discord|steam"]            move container to workspace $ws4; workspace $ws4
+for_window [class="Xfce4-terminal|Alacritty|unityhub|Unity"] move container to workspace $ws3; workspace $ws3
 
 # set window to floating by default
-for_window [class="Pcmanfm"]                  floating enable; move position center
+for_window [class="Pcmanfm|unityhub"]                  floating enable; move position center
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1

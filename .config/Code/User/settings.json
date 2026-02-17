@@ -1,0 +1,28 @@
+{
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.lineHeight": 1.6,
+    "editor.fontSize": 16,
+    "editor.fontFamily": "'Iosevka Nerd Font Regular', 'Droid Sans Mono', monospace",
+    "catppuccin.italicComments": false,
+    "catppuccin.italicKeywords": false,
+    "workbench.colorCustomizations": {
+        "editorIndentGuide.background1": "#00000001", // Makes inactive guides transparent
+        "editorIndentGuide.activeBackground": "#958feba0" // Optional: Sets the color of the active guide (grey with some transparency)
+    },
+    "editor.guides.indentation": true,
+    "editor.occurrencesHighlight": "off",
+    "editor.selectionHighlight": false,
+    "editor.matchBrackets": "never",
+    "editor.links": false,
+    "workbench.sideBar.location": "right",
+    "editor.stickyScroll.enabled": false,
+    "window.menuBarVisibility": "toggle",
+    "chat.agentsControl.enabled": false,
+    "workbench.layoutControl.enabled": false,
+    "window.commandCenter": false,
+    "editor.codeLensFontFamily": "monospace"
+}
