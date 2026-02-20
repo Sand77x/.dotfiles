@@ -120,7 +120,8 @@ bindsym $mod+F8        $execnsi flameshot full -r -p $ssdir | xclip -selection c
 # !! remember to change these keybinds
 # disable C-n, C-p
 # rebind C-d, C-e, C-h, C-l, C-j, C-k
-bindsym $mod+b       exec     brave-browser
+# if we're using dbus-session, make sure to add the --password-store flag so brave doesn't think we're using KDE and kwallet
+bindsym $mod+b       exec     brave-browser --password-store=basic
 
 # custom "action" macro basically in ~/.local/bin/custom
 bindsym $mod+space exec custom1
@@ -206,7 +207,8 @@ set $ws10 "10"
 # assign programs to workspaces
 for_window [class="Brave-browser"]            move container to workspace $ws1; workspace $ws1
 for_window [class="discord|steam"]            move container to workspace $ws4; workspace $ws4
-for_window [class="Xfce4-terminal|Alacritty|unityhub|Unity"] move container to workspace $ws3; workspace $ws3
+for_window [class="unityhub"]                 move container to workspace $ws2; workspace $ws2
+for_window [class="Xfce4-terminal|Alacritty|Unity|jetbrains-idea"] move container to workspace $ws3; workspace $ws3
 
 # set window to floating by default
 for_window [class="Pcmanfm|unityhub"]                  floating enable; move position center

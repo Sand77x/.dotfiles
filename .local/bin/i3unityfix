@@ -1,0 +1,8 @@
+#!/bin/sh
+# made by tesq0
+# https://github.com/tesq0/i3-unity-fix
+
+Path="$HOME/Projects/not_mine/i3-unity-fix"
+
+$Path/.venv/bin/python3 $Path/i3unityfix/i3unityfix.py
+

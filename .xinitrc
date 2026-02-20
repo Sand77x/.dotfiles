@@ -4,6 +4,6 @@
 [ -f "$HOME/.profile" ] && . "$HOME/.profile"
 
 # extra local configs
-~/.local-xinit
+[ -f "$HOME/.local-xinit" ] && . "$HOME/.local-xinit"
 
-exec i3
+exec dbus-run-session i3

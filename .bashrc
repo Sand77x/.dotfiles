@@ -126,7 +126,7 @@ alias ani='ani-cli --rofi'
 alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias sched='odoc s sched'
 alias blu='bluetoothctl'
-alias bb='brave-browser'
+alias brave='brave-browser --password-store=basic'
 alias latest='ls -t | head -n 1'
 alias neverssl='open http://neverssl.com'
 
@@ -134,9 +134,6 @@ alias neverssl='open http://neverssl.com'
 alias gst='git status'
 alias gdo='git dog'
 alias gdi='git diff'
-
-# flatpaks
-alias discord='flatpak run com.discordapp.Discord'
 
 # cargo binaries
 . "$HOME/.cargo/env"
