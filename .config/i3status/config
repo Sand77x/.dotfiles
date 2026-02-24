@@ -76,10 +76,12 @@ load {
         format = "Load: %1min"
 }
 
+# make symlink from temp to wherever you want to read temp from
+# ex: ln -sf /sys/class/hwmon/hwmon5/temp1_input ~/.config/i3status/cpu_temp
 cpu_temperature 0 {
         format = "Temp: %degrees°C"
         max_threshold = 70
-        path = "/sys/class/hwmon/hwmon3/temp1_input"
+        path = "~/.config/i3status/cpu_temp"
 }
 
 memory {
