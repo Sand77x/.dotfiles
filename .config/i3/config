@@ -206,6 +206,7 @@ set $ws10 "10"
 
 # assign programs to workspaces
 for_window [class="Brave-browser"]            move container to workspace $ws1; workspace $ws1
+for_window [title="Bitwarden"]                floating enable; border none
 for_window [class="discord|steam"]            move container to workspace $ws4; workspace $ws4
 for_window [class="unityhub"]                 move container to workspace $ws2; workspace $ws2
 for_window [class="Xfce4-terminal|Alacritty|Unity|jetbrains-idea"] move container to workspace $ws3; workspace $ws3
