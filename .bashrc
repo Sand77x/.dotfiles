@@ -92,6 +92,7 @@ alias ll='ls -lhX'
 alias la='ls -Ah'
 alias lt='ls -lt'
 alias l='ls -CFh'
+alias lc='ll --color=never'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
