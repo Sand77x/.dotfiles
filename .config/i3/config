@@ -191,7 +191,7 @@ bindsym $mod+Tab focus mode_toggle
 # workspace and window settings
 workspace_layout tabbed
 smart_borders    on
-new_window       normal 1
+new_window       normal 0
 gaps             inner 0
 
 # Define names for default workspaces for which we configure key bindings later on.
@@ -277,12 +277,19 @@ set $green_accent #2e6b4f
 set $focus_glow   #6fbf9c
 set $text_light   #eaf5ee
 set $text_dim     #0b140f
+set $color_none   #00000000
 
 # set window colors     border         background      text         indicator     child border
-client.focused          $green_accent  $green_accent   $text_light  $focus_glow   $green_accent
-client.focused_inactive $green_med     $green_med      $text_dim    $green_accent $green_med
-client.unfocused        $green_dark    $green_dark     $text_light  $green_med    $green_dark
+client.focused          $color_none  $green_accent   $text_light  $focus_glow    $color_none
+client.focused_inactive $color_none  $green_med      $text_dim    $green_accent  $color_none
+client.unfocused        $color_none  $green_dark     $text_light  $green_med     $color_none
 client.urgent           #4a1f2a        #7a2f42         $text_light  #c95a7a       #7a2f42
+
+# set window colors     border         background      text         indicator     child border
+# client.focused          $green_accent  $green_accent   $text_light  $focus_glow   $green_accent
+# client.focused_inactive $green_med     $green_med      $text_dim    $green_accent $green_med
+# client.unfocused        $green_dark    $green_dark     $text_light  $green_med    $green_dark
+# client.urgent           #4a1f2a        #7a2f42         $text_light  #c95a7a       #7a2f42
 
 # start i3bar with i3status
 bar {
