@@ -270,7 +270,13 @@ mode "resize" {
 # exec --no-startup-id nm-applet
 # exec --no-startup-id blueman-applet
 
+
 # colors
+set $yellow_active   #d9c86c
+set $yellow_inactive #362e05 
+set $black         #101010
+set $white         #f3f3f3
+
 set $green_dark   #0f1f17
 set $green_med    #1f3d2b
 set $green_accent #2e6b4f
@@ -280,24 +286,25 @@ set $text_dim     #0b140f
 set $color_none   #00000000
 
 # set window colors     border         background      text         indicator     child border
-client.focused          $color_none  $green_accent   $text_light  $focus_glow    $color_none
-client.focused_inactive $color_none  $green_med      $text_dim    $green_accent  $color_none
-client.unfocused        $color_none  $green_dark     $text_light  $green_med     $color_none
-client.urgent           #4a1f2a        #7a2f42         $text_light  #c95a7a       #7a2f42
-
-# set window colors     border         background      text         indicator     child border
-# client.focused          $green_accent  $green_accent   $text_light  $focus_glow   $green_accent
-# client.focused_inactive $green_med     $green_med      $text_dim    $green_accent $green_med
-# client.unfocused        $green_dark    $green_dark     $text_light  $green_med    $green_dark
+# client.focused          $color_none  $green_accent   $text_light  $focus_glow    $color_none
+# client.focused_inactive $color_none  $green_med      $text_dim    $green_accent  $color_none
+# client.unfocused        $color_none  $green_dark     $text_light  $green_med     $color_none
 # client.urgent           #4a1f2a        #7a2f42         $text_light  #c95a7a       #7a2f42
 
+# set window colors     border        background         text            indicator      child border
+client.focused          $color_none   $yellow_active     $black      $focus_glow    $color_none
+client.focused_inactive $color_none   $yellow_inactive   $white      $green_accent  $color_none
+client.unfocused        $color_none   $yellow_inactive   $white      $green_med     $color_none
+client.urgent           #4a1f2a        #7a2f42           $yellow_active  #c95a7a        #7a2f42
+
 # start i3bar with i3status
+# syntax: border background foreground
 bar {
         colors {
                 separator          #4a4a4a
-                focused_workspace  #2e6b4f #2e6b4f #eaf5ee
-                active_workspace   #1f3d2b #1f3d2b #6fbf9c
-                inactive_workspace #0f1f17 #1f3d2b #eaf5ee
+                focused_workspace  #000000 $yellow_active $black
+                active_workspace   #000000 $yellow_active $white
+                inactive_workspace #000000 $yellow_inactive $white 
                 urgent_workspace   #7a2f42 #7a2f42 #ffffff
         }
         separator_symbol "|"

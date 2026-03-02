@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# hijack dmenu for colors!
+
+NORMALFG="#dbba97"
+NORMALBG="#301c07"
+SELECTFG="#301c07"
+SELECTBG="#f79934"
+
+/usr/bin/dmenu "$@" -nb "$NORMALBG" -sf "$SELECTFG" -sb "$SELECTBG" -nf "$NORMALFG" 

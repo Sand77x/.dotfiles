@@ -740,6 +740,13 @@ require('lazy').setup(
                 transparent = false, -- Whether to set the bg color for the lunar variant
             },
         },
+        {
+            'gremble0/yellowbeans.nvim',
+            priority = 1000, -- Theme should load before most other plugins
+            config = function()
+                vim.cmd.colorscheme('yellowbeans')
+            end,
+        },
 
         -- Highlight todo, notes, etc in comments
         {
@@ -833,4 +840,4 @@ require('lazy').setup(
 )
 
 -- [[ Colorscheme ]]
-vim.cmd.colorscheme('conifer')
+vim.cmd.colorscheme('yellowbeans')
