@@ -1,5 +1,6 @@
 #!/bin/bash
 # for cron
+# ex. */5 * * * * /home/username/.local/bin/i3status/i3status-f1
 
 i3status-f1() {
     local exec="/opt/get-next-f1/get-next.sh"
@@ -31,7 +32,7 @@ i3status-f1() {
     loc_fmt="${loc_fmt,,}"
     local content="F1: ${loc_fmt^} $sesh ~$diff_str"
 
-    if (( days <= 3 )); then
+    if (( days*24+hours <= 28 )); then
         content="<span color=\"#ee8b2b\">$content</span>"
     fi
 

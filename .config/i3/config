@@ -40,6 +40,9 @@ set $ssdir       ~/Pictures/Screenshots
 # Start the compositor
 $execnsi picom -b
 
+# wallpaper
+$execalnsi feh --no-fehbg --bg-fill "$HOME/.local/share/links/wallpaper"
+
 # start policykit authentication agent
 $execnsi /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 

@@ -81,7 +81,7 @@ load {
 cpu_temperature 0 {
         format = "Temp: %degrees°C"
         max_threshold = 70
-        path = "~/.config/i3status/cpu_temp"
+        path = "~/.local/share/links/cpu_temp"
 }
 
 memory {
