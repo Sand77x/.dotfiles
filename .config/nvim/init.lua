@@ -41,7 +41,7 @@ vim.o.signcolumn = 'yes'
 
 vim.o.updatetime = 250
 
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 600
 
 vim.o.splitright = true
 vim.o.splitbelow = true
@@ -436,6 +436,9 @@ require('lazy').setup(
 
                         -- Hover
                         map('K', vim.lsp.buf.hover, 'Hover Symbol')
+
+                        -- Hover while in insert
+                        map('<C-s>', vim.lsp.buf.signature_help, 'Signature Help', { 'i', 'n' })
                     end,
                 })
 
@@ -673,6 +676,11 @@ require('lazy').setup(
                 },
 
                 completion = {
+                    trigger = {
+                        show_on_keyword = false,
+                        show_on_trigger_character = false,
+                    },
+
                     list = {
                         selection = {
                             preselect = true,
@@ -712,13 +720,12 @@ require('lazy').setup(
                     use_proximity = true,
                 },
 
-                -- Shows a signature help window while you type arguments for a function
-                signature = {
-                    enabled = true,
-                    window = {
-                        show_documentation = false,
-                    },
-                },
+                -- signature = {
+                --     enabled = true,
+                --     window = {
+                --         show_documentation = false,
+                --     },
+                -- },
             },
         },
 

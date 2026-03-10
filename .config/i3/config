@@ -67,6 +67,7 @@ $execnsi udiskie
 
 # !! remember to install tuned service for battery saving
 # start xidlehook https://github.com/jD91mZM2/xidlehook
+# !! also consider thermald (apt)
 # get custom i3lock here https://github.com/Raymo111/i3lock-color
 $execnsi my-xidlehook
 $execnsi $runsh "sleep 1 && toggle-xidlehook check && $refresh_i3status"
