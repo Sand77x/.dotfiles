@@ -119,6 +119,7 @@ fi
 # extra functions
 . "$HOME/.local/bin/bash/acd_func.sh"
 
+# aliases
 alias v='nvim'
 alias xcl='sed -z "s/\n$//" | xclip -selection clipboard'
 alias lg='lazygit'
@@ -129,6 +130,11 @@ alias blu='bluetoothctl'
 alias brave='brave-browser --password-store=basic'
 alias latest='ls -t | head -n 1'
 alias neverssl='open http://neverssl.com'
+
+# funcs
+back() {
+    cp "$1" "$1.bak"
+}
 
 # git
 alias gst='git status'

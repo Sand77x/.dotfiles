@@ -90,9 +90,9 @@ bindsym XF86AudioMute        $execnsi $runsh 'pamixer -t                  && $di
 bindsym $mod+m               $execnsi $runsh 'pamixer --default-source -t && $dify -i audio-volume-muted " Mic: $(pamixer --default-source --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
 
 # for non-laptops
-bindsym $mod+F10 $execnsi $runsh 'pamixer --allow-boost -d 5  && $dify -i audio-volume-low   " Volume: $(pamixer --get-volume)%"'
-bindsym $mod+F11 $execnsi $runsh 'pamixer --allow-boost -i 5  && $dify -i audio-volume-high  " Volume: $(pamixer --get-volume)%"'
-bindsym $mod+F9  $execnsi $runsh 'pamixer -t                  && $dify -i audio-volume-muted " Volume: $(pamixer --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
+bindsym $mod+F9  $execnsi $runsh 'pamixer --allow-boost -d 5  && $dify -i audio-volume-low   " Volume: $(pamixer --get-volume)%"'
+bindsym $mod+F10 $execnsi $runsh 'pamixer --allow-boost -i 5  && $dify -i audio-volume-high  " Volume: $(pamixer --get-volume)%"'
+bindsym $mod+s   $execnsi $runsh 'pamixer -t                  && $dify -i audio-volume-muted " Volume: $(pamixer --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
 
 # enable / disable video
 # !! remember to add to sudoers file user ALL=(root) NOPASSWD: /sbin/modprobe
@@ -109,7 +109,7 @@ bindsym $mod+F1 $execnsi $runsh '$dify -i weather-clear " Brightness: $(bright -
 bindsym $mod+F2 $execnsi $runsh '$dify -i weather-clear " Brightness: $(bright +)"'
 
 # enable / disable xidlehook
-bindsym $mod+o       $execnsi toggle-xidlehook && $refresh_i3status
+bindsym $mod+F7      $execnsi toggle-xidlehook && $refresh_i3status
 
 # exec applications
 bindsym Shift+Print  $execnsi flameshot gui  -r -p $ssdir | xclip -selection clipboard -t image/png
@@ -117,6 +117,7 @@ bindsym Print        $execnsi flameshot full -r -p $ssdir | xclip -selection cli
 bindsym $mod+a       $execnsi boomer
 bindsym $mod+v       $execnsi dmenu-watch
 bindsym $mod+Return  exec     alacritty --working-directory ~
+bindsym $mod+o       $execnsi pcmanfm
 
 bindsym $mod+Shift+F8  $execnsi flameshot gui  -r -p $ssdir | xclip -selection clipboard -t image/png
 bindsym $mod+F8        $execnsi flameshot full -r -p $ssdir | xclip -selection clipboard -t image/png
@@ -209,14 +210,18 @@ set $ws9  "9"
 set $ws10 "10"
 
 # assign programs to workspaces
-for_window [class="Brave-browser"]            move container to workspace $ws1; workspace $ws1
-for_window [title="Bitwarden"]                floating enable; border none
-for_window [class="discord|steam"]            move container to workspace $ws4; workspace $ws4
-for_window [class="unityhub"]                 move container to workspace $ws2; workspace $ws2
-for_window [class="Xfce4-terminal|Alacritty|Unity|jetbrains-idea"] move container to workspace $ws3; workspace $ws3
+for_window [class="Brave-browser"]\
+        move container to workspace $ws1; workspace $ws1
+for_window [class="unityhub|Apache JMeter|Blender Render|Image Editor"]\
+        move container to workspace $ws2; workspace $ws2
+for_window [class="Xfce4-terminal|Alacritty|Unity|jetbrains-idea|Code"]\
+        move container to workspace $ws3; workspace $ws3
+for_window [class="discord|steam"]\
+        move container to workspace $ws4; workspace $ws4
 
-# set window to floating by default
-for_window [class="Pcmanfm|unityhub"]                  floating enable; move position center
+for_window [title="Bitwarden"]                   floating enable; border none
+for_window [class="Blender" title="Preferences"] floating enable; move position center
+for_window [class="Pcmanfm|unityhub"]            floating enable; move position center
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -284,7 +289,7 @@ set $green_accent #2e6b4f
 set $focus_glow   #6fbf9c
 set $text_light   #eaf5ee
 set $text_dim     #0b140f
-set $color_none   #00000000
+set $color_none   #000000
 
 # set window colors     border         background      text         indicator     child border
 # client.focused          $color_none  $green_accent   $text_light  $focus_glow    $color_none

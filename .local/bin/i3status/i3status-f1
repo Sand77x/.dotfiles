@@ -33,7 +33,7 @@ i3status-f1() {
     local content="F1: ${loc_fmt^} $sesh ~$diff_str"
 
     if (( days*24+hours <= 28 )); then
-        content="<span color=\"#ee8b2b\">$content</span>"
+        content="<span color=\"#a8bcf0\">$content</span>"
     fi
 
     echo "$content" > "$file"

@@ -1,4 +1,5 @@
 #!/bin/sh
+# remember to add modprobe -r uvcvideo and modprobe uvcvideo to sudoers file
 
 if lsmod | grep -q '^uvcvideo'; then
     sudo /sbin/modprobe -r uvcvideo
