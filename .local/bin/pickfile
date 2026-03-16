@@ -1,0 +1,50 @@
+#!/bin/bash
+# Pick a file and choose an action: open or copy path
+
+# Expand ~ if passed
+START_DIR=$(realpath "$1")
+
+# List directories first, then files
+FILE=$(fdfind -i -H . "$START_DIR" | sed "s|^$START_DIR/||" | rofi -dmenu -i -p "Select file" -theme ~/.config/rofi/theme.rasi)
+
+# Exit if nothing selected
+[[ -z "$FILE" ]] && exit
+
+# Prepend the starting directory to get full path
+FILE="$START_DIR/$FILE"
+# Step 3: choose action
+ACTION=$(echo -e "Open file\nCopy path\nTerminal here\nBrowser here" | rofi -dmenu -i -p "Action for: $FILE" -theme ~/.config/rofi/theme.rasi)
+
+case "$ACTION" in
+    "Open file")
+        xdg-open "$FILE"
+        ;;
+    "Copy path")
+        echo "$FILE" | xclip -selection clipboard
+        notify-send "Copied file path" "$FILE"
+        ;;
+    "Terminal here")
+        if [[ -d "$FILE" ]]; then
+            # It's a directory → open there
+            DIR="$FILE"
+        else
+            # It's a file → open in its parent folder
+            DIR="$(dirname "$FILE")"
+        fi
+        alacritty --working-directory "$DIR"
+        ;;
+    "Browser here")
+        if [[ -d "$FILE" ]]; then
+            # It's a directory → open there
+            DIR="$FILE"
+        else
+            # It's a file → open in its parent folder
+            DIR="$(dirname "$FILE")"
+        fi
+        xdg-open "$DIR"
+        ;;
+    *)
+        # Cancelled
+        exit
+        ;;
+esac

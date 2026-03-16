@@ -115,7 +115,8 @@ bindsym $mod+F7      $execnsi toggle-xidlehook && $refresh_i3status
 bindsym $mod+a       $execnsi boomer
 bindsym $mod+v       $execnsi dmenu-watch
 bindsym $mod+Return  exec     alacritty --working-directory ~
-bindsym $mod+o       $execnsi pcmanfm
+bindsym $mod+o       $execnsi pickfile ~
+bindsym $mod+shift+o $execnsi pickfile /
 
 bindsym Shift+Print  $execnsi flameshot gui
 bindsym Print        $execnsi flameshot full
@@ -215,7 +216,7 @@ for_window [class="Brave-browser"]\
         move container to workspace $ws1; workspace $ws1
 for_window [class="unityhub|Apache JMeter|Blender Render|Image Editor"]\
         move container to workspace $ws2; workspace $ws2
-for_window [class="Xfce4-terminal|Alacritty|Unity|jetbrains-idea|Code|kdenlive"]\
+for_window [class="Xfce4-terminal|Alacritty|Blender|Unity|jetbrains-idea|Code|kdenlive"]\
         move container to workspace $ws3; workspace $ws3
 for_window [class="discord|steam"]\
         move container to workspace $ws4; workspace $ws4
