@@ -131,7 +131,7 @@ alias neverssl='open http://neverssl.com'
 
 # funcs
 xcl() {
-    echo -n "$1" | xclip -selection clipboard -i
+    xclip -selection clipboard -i
 }
 
 xclimg() {
@@ -146,7 +146,12 @@ back() {
 alias gst='git status'
 alias gdo='git dog'
 alias gdi='git diff'
-alias lgdot='lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+
+# dotfiles
 alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias lgdot='lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+alias dst='dot status'
+alias ddo='dot dog'
+alias ddi='dot diff'
 
 neofetch # run neofetch
