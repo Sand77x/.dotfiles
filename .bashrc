@@ -121,10 +121,8 @@ fi
 
 # aliases
 alias v='nvim'
-alias xcl='sed -z "s/\n$//" | xclip -selection clipboard'
 alias lg='lazygit'
 alias ani='ani-cli --rofi'
-alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias sched='odoc s sched'
 alias blu='bluetoothctl'
 alias brave='brave-browser --password-store=basic'
@@ -132,6 +130,14 @@ alias latest='ls -t | head -n 1'
 alias neverssl='open http://neverssl.com'
 
 # funcs
+xcl() {
+    echo -n "$1" | xclip -selection clipboard -i
+}
+
+xclimg() {
+    xclip -selection clipboard -t image/png -i "$1"
+}
+
 back() {
     cp "$1" "$1.bak"
 }
@@ -140,5 +146,7 @@ back() {
 alias gst='git status'
 alias gdo='git dog'
 alias gdi='git diff'
+alias lgdot='lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 neofetch # run neofetch
