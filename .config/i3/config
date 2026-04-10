@@ -115,6 +115,8 @@ bindsym $mod+F7      $execnsi toggle-xidlehook && $refresh_i3status
 bindsym $mod+a       $execnsi boomer
 bindsym $mod+v       $execnsi dmenu-watch
 bindsym $mod+Return  exec     alacritty --working-directory ~
+
+# !! remember to install rofi
 bindsym $mod+o       $execnsi pickfile ~
 bindsym $mod+shift+o $execnsi pickfile /
 

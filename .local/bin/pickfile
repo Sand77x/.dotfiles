@@ -9,12 +9,13 @@ MAXDEPTH=8
 FILE=$(fdfind -i -H -d $MAXDEPTH . "$START_DIR" | sed "s|^$START_DIR/||" | rofi -dmenu -matching prefix -i -p "Select (depth=$MAXDEPTH)" -theme ~/.config/rofi/theme.rasi)
 
 # Exit if nothing selected
+echo $FILE
 [[ -z "$FILE" ]] && exit
 
 # Prepend the starting directory to get full path
 FILE="$START_DIR/$FILE"
 # Step 3: choose action
-ACTION=$(echo -e "Open file\nCopy path\nTerminal here\nBrowser here\nNvim here" | rofi -matching prefix -dmenu -i -p "Action for $FILE" -theme ~/.config/rofi/theme.rasi)
+ACTION=$(echo -e "Open file\nCopy path\nTerminal here\nExplorer here\nNvim here" | rofi -matching prefix -dmenu -i -p "Action for $FILE" -theme ~/.config/rofi/theme.rasi)
 
 case "$ACTION" in
     "Open file")
@@ -34,7 +35,7 @@ case "$ACTION" in
         fi
         alacritty --working-directory "$DIR"
         ;;
-    "Browser here")
+    "Explorer here")
         if [[ -d "$FILE" ]]; then
             # It's a directory → open there
             DIR="$FILE"
@@ -45,7 +46,7 @@ case "$ACTION" in
         xdg-open "$DIR"
         ;;
     "Nvim here")
-        alacritty -e nvim "$FILE"
+        alacritty -e bash -c nvim "$FILE"
         ;;
     *)
         # Cancelled

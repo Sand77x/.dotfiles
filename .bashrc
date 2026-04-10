@@ -115,6 +115,7 @@ if ! shopt -oq posix; then
 fi
 
 # ============= End of defaults ==============
+shopt -s huponexit
 
 # extra functions
 . "$HOME/.local/bin/bash/acd_func.sh"

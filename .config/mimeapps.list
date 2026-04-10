@@ -11,6 +11,10 @@ x-scheme-handler/about=brave-browser.desktop
 x-scheme-handler/unknown=brave-browser.desktop
 video/mp4=mpv.desktop
 inode/directory=pcmanfm.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=abiword.desktop
+RUN.sh=nvim.desktop
+application/x-shellscript=nvim.desktop
+text/markdown=nvim.desktop
 
 [Added Associations]
 image/jpeg=sxiv.desktop;
