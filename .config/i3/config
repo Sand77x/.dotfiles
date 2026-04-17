@@ -225,7 +225,7 @@ for_window [class="discord|steam"]\
 
 for_window [title="Bitwarden"]                   floating enable; border none
 for_window [class="Blender" title="Preferences"] floating enable; move position center
-for_window [class="Pcmanfm|unityhub"]            floating enable; move position center
+for_window [class="Pcmanfm|unityhub|CMakeSetup"]            floating enable; move position center
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1

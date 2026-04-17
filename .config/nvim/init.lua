@@ -13,7 +13,7 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
 vim.o.number = true
-vim.o.relativenumber = false
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -747,13 +747,6 @@ require('lazy').setup(
                 transparent = false, -- Whether to set the bg color for the lunar variant
             },
         },
-        {
-            'gremble0/yellowbeans.nvim',
-            priority = 1000, -- Theme should load before most other plugins
-            config = function()
-                vim.cmd.colorscheme('yellowbeans')
-            end,
-        },
 
         -- Highlight todo, notes, etc in comments
         {
@@ -846,5 +839,5 @@ require('lazy').setup(
     }
 )
 
--- [[ Colorscheme ]]
-vim.cmd.colorscheme('yellowbeans')
+-- -- [[ Colorscheme ]]
+vim.cmd.colorscheme('minicyan')

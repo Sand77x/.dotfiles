@@ -88,9 +88,9 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -lhX'
+alias ll='ls --group-directories-first -lhX'
 alias la='ls -Ah'
-alias lt='ls -lt'
+# alias lt='ls -lht'
 alias l='ls -CFh'
 alias lc='ll --color=never'
 
@@ -119,6 +119,11 @@ shopt -s huponexit
 
 # extra functions
 . "$HOME/.local/bin/bash/acd_func.sh"
+
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # aliases
 alias v='nvim'
@@ -155,4 +160,4 @@ alias dst='dot status'
 alias ddo='dot dog'
 alias ddi='dot diff'
 
-neofetch # run neofetch
+shopt -q login_shell || neofetch # run neofetch
