@@ -1,15 +1,10 @@
 #!/bin/bash
 
 odoc() {
-    local def_grep_n=10
     local docdir="$HOME/odoc"
     local help="
 odoc <mode> [file] [args]
-a   Add new doc
 l   List docs
-rn  Rename doc
-s   Show doc [.scratch if none]
-gr  Grep in doc
 e   Edit doc [.scratch if none]
 d   Delete doc
     "
@@ -27,64 +22,14 @@ d   Delete doc
         return
     fi
 
+    local slashes="${arg//[^\/]}"
+    local n_slashes="${#slashes}"
+
     local file="$docdir/$arg.md"
 
-    case "${mode,,}" in 
-        "a")
-            if [ -e "$file" ]; then
-                echo "Doc already exists."
-                return
-            fi
-            touch "$file"
-            echo "Doc created: $file"
-            ;;
-
+    case "${mode,,}" in
         "l")
-            ls "$docdir"
-            ;;
-
-        "rn")
-            if [ ! -e "$file" ]; then
-                echo "Doc doesn't exist."
-                return
-            fi
-            local new_name="$3"
-            if [ -z "$new_name" ] || [ -e "$docdir/$new_name.md" ]; then
-                echo "Invalid rename target. Provide a new name as the third argument."
-                return
-            fi
-            mv "$file" "$docdir/$new_name.md"
-            echo "Doc renamed to: $new_name.md"
-            ;;
-
-        "s")
-            if [ -z "$arg" ]; then
-                file="$docdir/.scratch.md"
-                [ ! -e "$file" ] && { echo "# scratch" > "$file"; }
-                cat "$file"
-                return
-            fi
-            if [ ! -e "$file" ]; then
-                echo "Doc doesn't exist."
-                return
-            fi
-            if [ -z "$3" ]; then
-                cat "$file"
-            else
-                head -n "$3" "$file"
-            fi
-            ;;
-
-        "gr")
-            if [ ! -e "$file" ]; then
-                echo "Doc doesn't exist."
-                return
-            fi
-            if [ -z "$3" ]; then
-                echo "Enter header to grep as 3rd arg."
-                return
-            fi
-            grep "$3" -A "${4:-$def_grep_n}" "$file"
+            tree "$docdir"
             ;;
 
         "e")
@@ -92,7 +37,15 @@ d   Delete doc
                 file="$docdir/.scratch.md"
                 [ ! -e "$file" ] && echo "# scratch" > "$file"
             fi
+
+            innerdocdir="$(dirname "$file")"
+            [ $n_slashes -gt 0 ] && mkdir -p "$innerdocdir"
+
             "$editor" "$file"
+
+            if [ ! -e "$file" ] && [ $n_slashes -gt 0 ]; then
+                rmdir "$innerdocdir" 2>/dev/null
+            fi
             ;;
 
         "d")
