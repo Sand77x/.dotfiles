@@ -88,7 +88,7 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls --group-directories-first -lhX'
+alias ll='ls --group-directories-first -lh'
 alias la='ls -Ah'
 # alias lt='ls -lht'
 alias l='ls -CFh'

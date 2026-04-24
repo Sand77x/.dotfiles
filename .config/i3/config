@@ -84,15 +84,15 @@ bindsym XF86PowerOff         $execnsi power-menu
 bindsym $mod+F12             $execnsi power-menu
 
 # using pamixer to set volume
-bindsym XF86AudioRaiseVolume $execnsi $runsh 'pamixer --allow-boost -i 5  && $dify -i audio-volume-high  " Volume: $(pamixer --get-volume)%"'
-bindsym XF86AudioLowerVolume $execnsi $runsh 'pamixer --allow-boost -d 5  && $dify -i audio-volume-low   " Volume: $(pamixer --get-volume)%"'
-bindsym XF86AudioMute        $execnsi $runsh 'pamixer -t                  && $dify -i audio-volume-muted " Volume: $(pamixer --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
+bindsym XF86AudioRaiseVolume $execnsi $runsh 'pamixer --allow-boost -i 5  && $dify -i audio-volume-high  " Speaker: $(pamixer --get-volume)%"'
+bindsym XF86AudioLowerVolume $execnsi $runsh 'pamixer --allow-boost -d 5  && $dify -i audio-volume-low   " Speaker: $(pamixer --get-volume)%"'
+bindsym XF86AudioMute        $execnsi $runsh 'pamixer -t                  && $dify -i audio-volume-muted " Speaker: $(pamixer --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
 bindsym $mod+m               $execnsi $runsh 'pamixer --default-source -t && $dify -i audio-volume-muted " Mic: $(pamixer --default-source --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
 
 # for non-laptops
-bindsym $mod+F9  $execnsi $runsh 'pamixer --allow-boost -d 5  && $dify -i audio-volume-low   " Volume: $(pamixer --get-volume)%"'
-bindsym $mod+F10 $execnsi $runsh 'pamixer --allow-boost -i 5  && $dify -i audio-volume-high  " Volume: $(pamixer --get-volume)%"'
-bindsym $mod+s   $execnsi $runsh 'pamixer -t                  && $dify -i audio-volume-muted " Volume: $(pamixer --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
+bindsym $mod+F9  $execnsi $runsh 'pamixer --allow-boost -d 5  && $dify -i audio-volume-low   " Speaker: $(pamixer --get-volume)%"'
+bindsym $mod+F10 $execnsi $runsh 'pamixer --allow-boost -i 5  && $dify -i audio-volume-high  " Speaker: $(pamixer --get-volume)%"'
+bindsym $mod+s   $execnsi $runsh 'pamixer -t                  && $dify -i audio-volume-muted " Speaker: $(pamixer --get-mute | [ "$(grep true)" = "true" ] && echo Muted || echo Unmuted)" && i3status-mic-cam && $refresh_i3status'
 
 # enable / disable video
 # !! remember to add to sudoers file user ALL=(root) NOPASSWD: /sbin/modprobe
