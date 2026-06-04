@@ -23,10 +23,6 @@ vim.o.showmode = false
 
 vim.o.clipboard = 'unnamedplus'
 
-vim.schedule(function()
-    require('mache').setup()
-end)
-
 vim.o.breakindent = true
 
 vim.o.wrap = false
@@ -111,9 +107,6 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 -- Move lines in visual mode
 vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv')
 vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv')
-
--- Compile keymap
-vim.keymap.set('n', '<leader>cm', ':Compile ')
 
 -- zz remaps
 vim.keymap.set('n', 'J', 'mzJ`z')
@@ -323,22 +316,22 @@ require('lazy').setup(
                 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search Help' })
                 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
                 vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Search Files' })
-                vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Select Telescope' })
+                -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Select Telescope' })
                 vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
                 vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Search by Grep' })
                 vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search Diagnostics' })
-                vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Search Resume' })
-                vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
+                -- vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Search Resume' })
+                vim.keymap.set('n', '<leader>sr', builtin.oldfiles, { desc = 'Search Recent Files' })
                 vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Find existing buffers' })
 
                 -- Slightly advanced example of overriding default behavior and theme
-                vim.keymap.set('n', '<leader>s/', function()
-                    -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-                    builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
-                        winblend = 10,
-                        previewer = false,
-                    }))
-                end, { desc = '[/] Fuzzily search in current buffer' })
+                -- vim.keymap.set('n', '<leader>s/', function()
+                --     -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+                --     builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
+                --         winblend = 10,
+                --         previewer = false,
+                --     }))
+                -- end, { desc = '[/] Fuzzily search in current buffer' })
 
                 -- Shortcut for searching your Neovim configuration files
                 vim.keymap.set('n', '<leader>sn', function()
@@ -369,6 +362,9 @@ require('lazy').setup(
                 { 'mason-org/mason.nvim', opts = {}, version = 'v1.*' },
                 { 'mason-org/mason-lspconfig.nvim', version = 'v1.*' },
                 'WhoIsSethDaniel/mason-tool-installer.nvim',
+
+                -- Specific language lsp
+                { 'mfussenegger/nvim-jdtls' },
 
                 -- Useful status updates for LSP.
                 { 'j-hui/fidget.nvim', opts = {}, version = 'v1.5.*' },
@@ -420,22 +416,23 @@ require('lazy').setup(
 
                         -- Fuzzy find all the symbols in your current document.
                         --  Symbols are things like variables, functions, types, etc.
-                        map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+                        --  uses <leader>s syntax because searching
+                        map('<leader>ss', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
 
                         -- Fuzzy find all the symbols in your current workspace.
                         --  Similar to document symbols, except searches over your entire project.
-                        map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
+                        -- map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
 
                         -- Jump to the type of the word under your cursor.
                         --  Useful when you're not sure what type a variable is and you want to see
                         --  the definition of its *type*, not where it was *defined*.
                         map('grt', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
 
-                        -- Show error in floating window
-                        map('<C-e>', vim.diagnostic.open_float, 'Show Error in Floating Window')
-
                         -- Hover
                         map('K', vim.lsp.buf.hover, 'Hover Symbol')
+
+                        -- Show error in floating window
+                        map('<C-e>', vim.diagnostic.open_float, 'Show Error in Floating Window', { 'i', 'n' })
 
                         -- Hover while in insert
                         map('<C-s>', vim.lsp.buf.signature_help, 'Signature Help', { 'i', 'n' })
@@ -518,6 +515,7 @@ require('lazy').setup(
                             },
                         },
                     },
+                    jdtls = {},
                 }
 
                 -- You can add other tools here that you want Mason to install
@@ -650,8 +648,9 @@ require('lazy').setup(
                     ['<CR>'] = { 'accept', 'fallback' },
                     ['<C-l>'] = { 'snippet_forward', 'fallback' },
                     ['<C-h>'] = { 'snippet_backward', 'fallback' },
+                    ['<C-space>'] = { 'show', 'fallback' },
                     ['<C-p>'] = { 'select_prev', 'fallback' },
-                    ['<C-n>'] = { 'show', 'select_next', 'fallback' },
+                    ['<C-n>'] = { 'select_next', 'fallback' },
                     ['<C-j>'] = { 'scroll_documentation_down', 'fallback' },
                     ['<C-k>'] = { 'scroll_documentation_up', 'fallback' },
                 },

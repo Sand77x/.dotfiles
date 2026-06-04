@@ -15,6 +15,7 @@ application/vnd.openxmlformats-officedocument.wordprocessingml.document=abiword.
 RUN.sh=nvim.desktop
 application/x-shellscript=nvim.desktop
 text/markdown=nvim.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 
 [Added Associations]
 image/jpeg=sxiv.desktop;

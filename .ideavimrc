@@ -1,0 +1,88 @@
+let mapleader=' '
+
+set clipboard+=unnamedplus
+set relativenumber
+set incsearch
+set nu
+set scrolloff=5
+
+set visualbell
+
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap <C-j> 5j
+nnoremap <C-k> 5k
+vnoremap <C-j> 5j
+vnoremap <C-k> 5k
+vnoremap <C-d> <C-d>zz
+vnoremap <C-u> <C-u>zz
+
+nnoremap q %
+nnoremap H ^
+nnoremap L $
+nnoremap Q q
+vnoremap q %
+vnoremap H ^
+vnoremap L $
+vnoremap Q q
+
+nnoremap ( #
+nnoremap ) *
+vnoremap ( #
+vnoremap ) *
+
+nnoremap J mzJ`z
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+map <C-w> :q<CR>
+
+""" Autoclose remaps
+inoremap "<tab> ""<Left>
+inoremap \'<tab> \'\'<Left>
+inoremap (<tab> ()<Left>
+inoremap <<tab> <><Left>
+inoremap ><tab> </><Left>
+inoremap [<tab> []<Left>
+inoremap {<tab> {}<Left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+
+""" Rider Mappings
+nmap <C-=> <Action>(ZoomInIdeAction)
+nmap <C--> <Action>(ZoomOutIdeAction)
+
+nmap <C-l> <Action>(NextTab)
+nmap <C-h> <Action>(PreviousTab)
+
+nmap \ :NERDTree<CR>
+nmap <leader>\ :NERDTreeToggle<CR>
+
+nmap ]d <Action>(GotoNextError)
+nmap [d <Action>(GotoPreviousError)
+
+imap <C-space> <Action>(CodeCompletion)
+
+nmap gac <Action>(ShowIntentionActions)
+nmap <leader>fo <Action>(ReformatCode)
+nmap K <Action>(ShowHoverInfo)
+nmap <leader>sf <Action>(GotoFile)
+nmap <leader>sa <Action>(GotoAction)
+nmap <leader>sg <Action>(TextSearchAction)
+nmap <leader>ss <Action>(SearchEverywhere)
+nmap <leader>se <Action>(ShowSettings)
+
+nmap <leader>sp <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>st <Action>(ActivateTerminalToolWindow)
+
+nmap <leader>iv :source ~/.ideavimrc<CR>
+
+""" Plugins
+let g:highlightedyank_highlight_duration="150"
+Plug 'machakann/vim-highlightedyank'
+
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'tpope/vim-commentary'
+Plug 'justinmk/vim-sneak'
+Plug 'preservim/nerdtree'
