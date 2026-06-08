@@ -117,4 +117,26 @@ return {
             filesize = 1,
         },
     },
+    {
+        'akinsho/bufferline.nvim',
+        version = '*',
+        dependencies = 'nvim-tree/nvim-web-devicons',
+        config = function()
+            local bufferline = require('bufferline')
+            bufferline.setup({
+                options = {
+                    themable = true,
+                    show_close_icon = false,
+                    show_buffer_close_icons = false,
+                },
+            })
+        end,
+        -- opts = {
+        --     themable = true,
+        --     indicator = {
+        --         style = 'underline',
+        --     },
+        --     show_close_icon = false,
+        -- },
+    },
 }

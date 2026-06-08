@@ -172,6 +172,18 @@ vim.keymap.set('n', '<leader>L', '<C-w>L', { desc = 'Move split to the right' })
 vim.keymap.set('n', '<leader>J', '<C-w>J', { desc = 'Move split to the lower' })
 vim.keymap.set('n', '<leader>K', '<C-w>K', { desc = 'Move split to the upper' })
 
+-- Tab nav
+vim.keymap.set('n', '<C-h>', ':BufferLineCyclePrev<CR>', { desc = 'Bufferline: Goto previous buffer', silent = true })
+vim.keymap.set('n', '<C-l>', ':BufferLineCycleNext<CR>', { desc = 'Bufferline: Goto next buffer', silent = true })
+vim.keymap.set(
+    'n',
+    '<C-w>',
+    ':bdelete<CR>',
+    { desc = 'Bufferline: Close current buffer', nowait = true, silent = true }
+)
+vim.keymap.set('n', '<<', ':BufferLineMovePrev<CR>', { desc = 'Bufferline: Move buffer to the left', silent = true })
+vim.keymap.set('n', '>>', ':BufferLineMoveNext<CR>', { desc = 'Bufferline: Move buffer to the right', silent = true })
+
 vim.keymap.set({ 'n', 'v' }, '<C-j>', function()
     return (vim.v.count > 0 and vim.v.count * 5 or 5) .. 'j'
 end, { expr = true })
@@ -396,7 +408,7 @@ require('lazy').setup(
 
                         -- Execute a code action, usually your cursor needs to be on top of an error
                         -- or a suggestion from your LSP for this to activate.
-                        map('gac', vim.lsp.buf.code_action, 'Goto Code Action', { 'n', 'x' })
+                        map('gca', vim.lsp.buf.code_action, 'Goto Code Action')
 
                         -- Find references for the word under your cursor.
                         map('grr', require('telescope.builtin').lsp_references, 'Goto References')

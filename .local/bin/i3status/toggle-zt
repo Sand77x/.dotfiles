@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+toggle_zt() {
+    local normal_color="#f2eb22"
+    local bad_color="#ffffff"
+
+    local file="$HOME/.cache/zt_status"
+
+    if [ -z "$file" ]; then
+        touch "$file"
+        echo "DIS" > "$file"
+    fi
+
+    if warp-cli status | grep "Connected"; then
+        warp-cli disconnect
+        echo "<span color=\"${normal_color}\">Zt: DIS</span>" > "$file"
+    else
+        warp-cli connect
+        echo "<span color=\"${bad_color}\">Zt: CON</span>" > "$file"
+    fi
+
+    killall -SIGUSR1 i3status
+}
+
+toggle_zt
