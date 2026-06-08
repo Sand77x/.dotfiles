@@ -17,6 +17,9 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
+# don't switch focus on mouse hover
+focus_follows_mouse no
+
 # !! remember to get noto color for emojis https://fonts.google.com/noto/specimen/Noto+Color+Emoji
 # !! remember to install lxappearance for theming
 # font for window titles, can be overriden in the bar {} block below.
@@ -29,10 +32,6 @@ set $execalnsi        exec_always --no-startup-id
 set $dify             dunstify -r 6767
 set $runsh            sh -c
 set $refresh_i3status killall -SIGUSR1 i3status
-
-# for external i3status stuff
-# F1 next race tracker: install https://github.com/Sand77x/get-next-f1
-# add to crontab: */5 * * * * /home/{user}/.local/bin/i3status/i3status-f1
 
 # directory and file vars
 set $ssdir       ~/Pictures/Screenshots
@@ -72,9 +71,18 @@ $execnsi udiskie
 $execnsi my-xidlehook
 $execnsi $runsh "sleep 1 && toggle-xidlehook check && $refresh_i3status"
 
+# for external i3status stuff
+# F1 next race tracker: install https://github.com/Sand77x/get-next-f1
+# */5 * * * * /home/{user}/.local/bin/i3status/i3status-f1
+#
+# Warp-cli status checker
+# */10 * * * * /home/{user}/.local/bin/i3status/toggle-zt check
+#
 # write cache on startup for i3status
 $execalnsi i3status-f1
 $execnsi   i3status-mic-cam
+$execnsi  "sh -c 'sleep 20; toggle-zt check'"
+
 
 # for people using my laptop
 bindsym $mod+Shift+s $execnsi $runsh '$dify "HELP" "win+z to launch programs\nwin+w to close programs\nwin+b to launch browser\nwin+enter to launch terminal"'

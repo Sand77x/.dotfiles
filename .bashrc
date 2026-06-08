@@ -119,6 +119,7 @@ shopt -s huponexit
 
 # extra functions
 . "$HOME/.local/bin/bash/acd_func.sh"
+. "$HOME/.local/bin/odoc.d/odoc_cmp.sh"
 
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 

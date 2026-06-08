@@ -8,6 +8,11 @@ set scrolloff=5
 
 set visualbell
 
+" ideavim please don't use these
+sethandler <C-Q> a:ide
+sethandler <C-V> a:ide
+sethandler <C-2> a:ide
+
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 nnoremap <C-j> 5j
@@ -40,7 +45,6 @@ map <C-w> :q<CR>
 
 """ Autoclose remaps
 inoremap "<tab> ""<Left>
-inoremap \'<tab> \'\'<Left>
 inoremap (<tab> ()<Left>
 inoremap <<tab> <><Left>
 inoremap ><tab> </><Left>
@@ -55,6 +59,9 @@ nmap <C--> <Action>(ZoomOutIdeAction)
 
 nmap <C-l> <Action>(NextTab)
 nmap <C-h> <Action>(PreviousTab)
+
+nmap << <Action>(com.mnw.tabmover.actions.MoveTabUpAction)
+nmap >> <Action>(com.mnw.tabmover.actions.MoveTabDownAction)
 
 nmap \ :NERDTree<CR>
 nmap <leader>\ :NERDTreeToggle<CR>
@@ -73,8 +80,9 @@ nmap <leader>sg <Action>(TextSearchAction)
 nmap <leader>ss <Action>(SearchEverywhere)
 nmap <leader>se <Action>(ShowSettings)
 
-nmap <leader>sp <Action>(ActivateProblemsViewToolWindow)
-nmap <leader>st <Action>(ActivateTerminalToolWindow)
+" using system keymaps
+"nmap <C-p> <Action>(ActivateProblemsViewToolWindow)
+"nmap <C-t> <Action>(ActivateTerminalToolWindow)
 
 nmap <leader>iv :source ~/.ideavimrc<CR>
 
@@ -86,3 +94,27 @@ Plug 'vim-scripts/argtextobj.vim'
 Plug 'tpope/vim-commentary'
 Plug 'justinmk/vim-sneak'
 Plug 'preservim/nerdtree'
+
+" No copy on delete (except d)
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+vnoremap <leader>p p
+vnoremap <leader>P P
+vnoremap p "_dp
+vnoremap P "_dP
+nnoremap <leader>c c
+vnoremap <leader>c c
+nnoremap <leader>C C
+vnoremap <leader>C C
+nnoremap c "_c
+vnoremap c "_c
+nnoremap C "_C
+vnoremap C "_C
+nnoremap <leader>x x
+vnoremap <leader>x x
+nnoremap <leader>X X
+vnoremap <leader>X X
+nnoremap x "_x
+vnoremap x "_x
+nnoremap X "_X
+vnoremap X "_X

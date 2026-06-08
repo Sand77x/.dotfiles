@@ -183,6 +183,10 @@ vim.keymap.set(
 )
 vim.keymap.set('n', '<<', ':BufferLineMovePrev<CR>', { desc = 'Bufferline: Move buffer to the left', silent = true })
 vim.keymap.set('n', '>>', ':BufferLineMoveNext<CR>', { desc = 'Bufferline: Move buffer to the right', silent = true })
+vim.keymap.set('n', '<Tab>', '>>', { desc = 'Bufferline: Move buffer to the right', silent = true })
+vim.keymap.set('n', '<S-Tab>', '<<', { desc = 'Bufferline: Move buffer to the left', silent = true })
+vim.keymap.set('v', '<Tab>', '>', { desc = 'Bufferline: Move buffer to the right', silent = true })
+vim.keymap.set('v', '<S-Tab>', '<', { desc = 'Bufferline: Move buffer to the left', silent = true })
 
 vim.keymap.set({ 'n', 'v' }, '<C-j>', function()
     return (vim.v.count > 0 and vim.v.count * 5 or 5) .. 'j'

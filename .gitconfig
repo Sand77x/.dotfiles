@@ -14,3 +14,5 @@
 	cend = commit --amend
 [include]
 	path = ~/.gitconfig_local
+[credential]
+	helper = store

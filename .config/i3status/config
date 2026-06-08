@@ -17,12 +17,19 @@ order += "memory"
 order += "battery all"
 order += "read_file MIC_CAM"
 order += "read_file SCREEN_SAVER"
+order += "read_file ZT_STATUS"
 order += "tztime local"
 
 read_file SCREEN_SAVER {
         color_good = "#ffffff"
         format = "%content"
         path = "~/.cache/xidlehook_status"
+}
+
+read_file ZT_STATUS {
+        color_good = "#ffffff"
+        format = "%content"
+        path = "~/.cache/zt_status"
 }
 
 read_file F1 {

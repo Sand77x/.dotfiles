@@ -1,26 +1,43 @@
 #!/bin/bash
 
+# example of crontab if you want it to check periodically
+# */10 * * * * /home/sand77x/.local/bin/i3status/toggle-zt check
 
 toggle_zt() {
+    local checking=false
+    if [ -n "$1" ]; then
+        checking=true
+    fi
+
     local normal_color="#f2eb22"
     local bad_color="#ffffff"
 
     local file="$HOME/.cache/zt_status"
 
-    if [ -z "$file" ]; then
-        touch "$file"
-        echo "DIS" > "$file"
+    if [ ! -f "$file" ]; then
+        echo "DISC" > "$file"
     fi
 
-    if warp-cli status | grep "Connected"; then
-        warp-cli disconnect
-        echo "<span color=\"${normal_color}\">Zt: DIS</span>" > "$file"
+    if warp-cli status | grep -q "Connected"; then
+        if "$checking"; then
+            echo "<span color=\"${bad_color}\">Zt: CONN</span>" > "$file"
+        else
+            warp-cli disconnect
+            echo "<span color=\"${normal_color}\">Zt: DISC</span>" > "$file"
+        fi
     else
-        warp-cli connect
-        echo "<span color=\"${bad_color}\">Zt: CON</span>" > "$file"
+        if "$checking"; then
+            echo "<span color=\"${normal_color}\">Zt: DISC</span>" > "$file"
+        else
+            if warp-cli connect; then
+                echo "<span color=\"${bad_color}\">Zt: CONN</span>" > "$file"
+            else
+                echo "<span color=\"${bad_color}\">Zt: FAIL</span>" > "$file"
+            fi
+        fi
     fi
 
     killall -SIGUSR1 i3status
 }
 
-toggle_zt
+toggle_zt "$@"
