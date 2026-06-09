@@ -1,0 +1,16 @@
+#!/bin/bash
+
+_bright_set() {
+    local PRIMARY_DISPLAY="$(xrandr | awk '/ connected/{print $1; exit}')"
+
+    local BRIGHTNESS_CACHE="$HOME/.cache/xrandr_brightness"
+    [ -f "$BRIGHTNESS_CACHE" ] || echo "1" > "$BRIGHTNESS_CACHE"
+
+    if [ -z "$1" ]; then
+        xrandr --output "$PRIMARY_DISPLAY" --brightness "$(cat "$BRIGHTNESS_CACHE")"
+    else
+        xrandr --output "$PRIMARY_DISPLAY" --brightness "$1"
+    fi
+}
+
+_bright_set "$@"

@@ -1,22 +1,20 @@
 #!/usr/bin/env bash
 
 cache="$HOME/.cache/xidlehook_status"
-[ -f "$cache" ] || echo "Saver:  ON" > "$cache"
 
-# Only exported variables can be used within the timer's command.
-export PRIMARY_DISPLAY="$(xrandr | awk '/ connected/{print $1; exit}')"
+[ -f "$cache" ] || echo "Saver:  ON" > "$cache"
 
 # Run xidlehook
 xidlehook \
   --socket '/var/tmp/xidlehook.sock' \
   --not-when-fullscreen \
   --not-when-audio \
-  --timer 180 \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness .4' \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
+  --timer 3 \
+    'bright-set 0.4' \
+    'bright-set' \
   --timer 150 \
     '! pgrep i3lock >/dev/null && i3lock-cool' \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
+    'bright_set' \
   --timer 480 \
     'systemctl suspend' \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
+    'bright_set' \

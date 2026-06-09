@@ -109,10 +109,13 @@ bindsym $mod+c               $execnsi $runsh 'toggle-cam && i3status-mic-cam && 
 $execnsi $runsh 'sudo /sbin/modprobe -r uvcvideo && sleep 1 && i3status-mic-cam'
 
 # using light to set brightness
+# set brightness from cache
+$execnsi bright-set
 bindsym XF86MonBrightnessUp   $execnsi $runsh '$dify -i weather-clear " Brightness: $(light -A 10 && light -G | cut -d. -f1)%"'
 bindsym XF86MonBrightnessDown $execnsi $runsh '$dify -i weather-clear " Brightness: $(light -U 10 && light -G | cut -d. -f1)%"'
 
 # use randxr for PCs
+$execnsi source '~/.local/bin/i3/restore-xrandr-brightness.sh'
 bindsym $mod+F1 $execnsi $runsh '$dify -i weather-clear " Brightness: $(bright -)"'
 bindsym $mod+F2 $execnsi $runsh '$dify -i weather-clear " Brightness: $(bright +)"'
 

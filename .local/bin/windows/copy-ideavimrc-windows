@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if findmnt /mnt/windows > /dev/null; then
+    cp ~/.ideavimrc /mnt/windows/Users/sand77x/.ideavimrc
+    echo "copied ~/.ideavimrc to /mnt/windows/Users/sand77x/.ideavimrc"
+else
+    echo "windows not mounted at /mnt/windows"
+fi

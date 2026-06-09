@@ -35,6 +35,8 @@ xrandr --output "$MON" --brightness "$CurrBright"   # Set new brightness
 
 # Display current brightness
 Bri="$( xrandr --verbose --current | grep ^"$MON" -A5 | tail -n1 )"
-Bri=${Bri##* }
-Bri=$(echo "$Bri * 100" | bc)
-printf "%.0f%%\n" "$Bri"
+Bri="$(awk '{print $2}' <<< "$Bri")"
+echo "$Bri"
+
+# Cache brightness for my-xidlehook
+echo "$Bri" > "$HOME/.cache/xrandr_brightness"

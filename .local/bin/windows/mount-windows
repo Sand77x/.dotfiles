@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if mountpoint -q /mnt/windows; then
+    sudo umount /mnt/windows
+    echo "unmounted windows!"
+else
+    sudo mount -t ntfs-3g /dev/nvme0n1p3 /mnt/windows
+    echo "mounted windows at /mnt/windows"
+fi
