@@ -28,9 +28,3 @@ if [ -d "$HOME/.local/bin" ] ; then
         PATH="$dir:$PATH"
     done
 fi
-
-# cargo binaries
-. "$HOME/.cargo/env"
-
-export NVM_DIR="$HOME/.nvm"
-export SDKMAN_DIR="$HOME/.sdkman"

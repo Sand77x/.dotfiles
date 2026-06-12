@@ -8,6 +8,8 @@ set scrolloff=5
 
 set visualbell
 
+set ignorecase
+
 " ideavim please don't use these
 sethandler <C-Q> a:ide
 sethandler <C-V> a:ide
@@ -45,6 +47,7 @@ map <C-w> :q<CR>
 
 """ Autoclose remaps
 inoremap "<tab> ""<Left>
+inoremap '<tab> ''<Left>
 inoremap (<tab> ()<Left>
 inoremap <<tab> <><Left>
 inoremap ><tab> </><Left>
@@ -60,8 +63,8 @@ nmap <C--> <Action>(ZoomOutIdeAction)
 nmap <C-l> <Action>(NextTab)
 nmap <C-h> <Action>(PreviousTab)
 
-nmap << <Action>(com.mnw.tabmover.actions.MoveTabUpAction)
-nmap >> <Action>(com.mnw.tabmover.actions.MoveTabDownAction)
+nmap <C-S-l> <Action>(com.mnw.tabmover.actions.MoveTabDownAction)
+nmap <C-S-h> <Action>(com.mnw.tabmover.actions.MoveTabUpAction)
 
 nmap \ :NERDTree<CR>
 nmap <leader>\ :NERDTreeToggle<CR>

@@ -27,7 +27,7 @@ return {
         end,
     },
     { -- Jump anywhere you can see easily
-        'ggandor/leap.nvim',
+        url = 'https://codeberg.org/andyg/leap.nvim',
         keys = {
             {
                 '<CR>',

@@ -65,14 +65,13 @@ vim.o.cmdwinheight = 20
 
 -- [[ Basic Keymaps ]]
 
--- Open lazygit in new wezterm window
 local function in_git_repo()
     vim.fn.system('git rev-parse --is-inside-work-tree')
     return vim.v.shell_error == 0
 end
 
 if vim.fn.executable('lazygit') then
-    vim.keymap.set('n', '<leader>gs', function()
+    vim.keymap.set('n', '<leader>lg', function()
         if not in_git_repo() then
             print('Error: Not in a git repo!')
             return
@@ -88,6 +87,30 @@ if vim.fn.executable('lazygit') then
 else
     vim.keymap.set('n', '<leader>gs', '<cmd>echo "No lazygit installed!"<CR>')
 end
+
+vim.keymap.set('n', '<leader>vs', function()
+    local file = vim.fn.expand('%:p')
+    local dir = vim.fn.expand('%:p:h')
+    dir = dir:gsub('^oil://', '') -- if in oil buffer, get path
+
+    vim.fn.jobstart({ 'alacritty', '--working-directory', dir, '-e', 'nvim', file }, { detach = true })
+
+    if vim.fn.executable('i3-msg') then
+        vim.fn.jobstart({ 'i3-msg', 'layout splith' }, { detach = true })
+    end
+end)
+
+vim.keymap.set('n', '<leader>hs', function()
+    local file = vim.fn.expand('%:p')
+    local dir = vim.fn.expand('%:p:h')
+    dir = dir:gsub('^oil://', '') -- if in oil buffer, get path
+
+    vim.fn.jobstart({ 'alacritty', '--working-directory', dir, '-e', 'nvim', file }, { detach = true })
+
+    if vim.fn.executable('i3-msg') then
+        vim.fn.jobstart({ 'i3-msg', 'layout splitv' }, { detach = true })
+    end
+end)
 
 -- Remap Esc
 vim.keymap.set({ 'i', 'n', 'v' }, '<C-c>', '<Esc>', { noremap = true })
@@ -157,9 +180,9 @@ vim.keymap.set('i', '{<CR>', '{<CR>}<ESC>O')
 vim.keymap.set('i', '{;<CR>', '{<CR>};<ESC>O')
 
 -- Split opening / closing
-vim.keymap.set('n', '<leader>vs', ':vsplit<CR>')
-vim.keymap.set('n', '<leader>vh', ':split<CR>')
-vim.keymap.set('n', '<leader>vo', ':only<CR>')
+-- vim.keymap.set('n', '<leader>vs', ':vsplit<CR>')
+-- vim.keymap.set('n', '<leader>vh', ':split<CR>')
+-- vim.keymap.set('n', '<leader>vo', ':only<CR>')
 
 -- Split navigation
 vim.keymap.set('n', '<leader>h', '<C-w><C-h>', { desc = 'Move focus to the left window' })
@@ -181,12 +204,19 @@ vim.keymap.set(
     ':bdelete<CR>',
     { desc = 'Bufferline: Close current buffer', nowait = true, silent = true }
 )
-vim.keymap.set('n', '<<', ':BufferLineMovePrev<CR>', { desc = 'Bufferline: Move buffer to the left', silent = true })
-vim.keymap.set('n', '>>', ':BufferLineMoveNext<CR>', { desc = 'Bufferline: Move buffer to the right', silent = true })
-vim.keymap.set('n', '<Tab>', '>>', { desc = 'Bufferline: Move buffer to the right', silent = true })
-vim.keymap.set('n', '<S-Tab>', '<<', { desc = 'Bufferline: Move buffer to the left', silent = true })
-vim.keymap.set('v', '<Tab>', '>', { desc = 'Bufferline: Move buffer to the right', silent = true })
-vim.keymap.set('v', '<S-Tab>', '<', { desc = 'Bufferline: Move buffer to the left', silent = true })
+
+vim.keymap.set(
+    'n',
+    '<C-S-H>',
+    ':BufferLineMovePrev<CR>',
+    { desc = 'Bufferline: Move buffer to the left', silent = true }
+)
+vim.keymap.set(
+    'n',
+    '<C-S-L>',
+    ':BufferLineMoveNext<CR>',
+    { desc = 'Bufferline: Move buffer to the right', silent = true }
+)
 
 vim.keymap.set({ 'n', 'v' }, '<C-j>', function()
     return (vim.v.count > 0 and vim.v.count * 5 or 5) .. 'j'
@@ -412,7 +442,7 @@ require('lazy').setup(
 
                         -- Execute a code action, usually your cursor needs to be on top of an error
                         -- or a suggestion from your LSP for this to activate.
-                        map('gca', vim.lsp.buf.code_action, 'Goto Code Action')
+                        map('gac', vim.lsp.buf.code_action, 'Goto Code Action')
 
                         -- Find references for the word under your cursor.
                         map('grr', require('telescope.builtin').lsp_references, 'Goto References')
@@ -792,35 +822,8 @@ require('lazy').setup(
         },
         { -- Highlight, edit, and navigate code
             'nvim-treesitter/nvim-treesitter',
+            lazy = false,
             build = ':TSUpdate',
-
-            main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-            config = function(_, opts)
-                require('nvim-treesitter.install').compilers = { 'zig', 'cc', 'gcc', 'cl' }
-                require('nvim-treesitter.configs').setup(opts)
-            end,
-            opts = {
-                ensure_installed = {
-                    'bash',
-                    'c',
-                    'diff',
-                    'html',
-                    'lua',
-                    'luadoc',
-                    'markdown',
-                    'markdown_inline',
-                    'query',
-                    'vim',
-                    'vimdoc',
-                },
-                -- Autoinstall languages that are not installed
-                auto_install = true,
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = { 'ruby' },
-                },
-                indent = { enable = true, disable = { 'ruby' } },
-            },
         },
 
         -- Kickstart default plugins

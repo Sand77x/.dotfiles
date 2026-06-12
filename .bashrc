@@ -89,6 +89,7 @@ fi
 
 # some more ls aliases
 alias ll='ls --group-directories-first -lh'
+alias ltr='ll -ltr'
 alias la='ls -Ah'
 # alias lt='ls -lht'
 alias l='ls -CFh'
@@ -116,6 +117,14 @@ fi
 
 # ============= End of defaults ==============
 shopt -s huponexit
+
+# cargo binaries
+. "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+export SDKMAN_DIR="$HOME/.sdkman"
+
+export MANPAGER="nvim +Man!"
 
 # extra functions
 for FILE in "$HOME/.local/bin/bash"/*.sh; do
@@ -161,5 +170,8 @@ alias lgdot='lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias dst='dot status'
 alias ddo='dot dog'
 alias ddi='dot diff'
+
+# executables
+alias pgcli='EDITOR=nvim pgcli'
 
 shopt -q login_shell || neofetch # run neofetch

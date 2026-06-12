@@ -9,12 +9,12 @@ xidlehook \
   --socket '/var/tmp/xidlehook.sock' \
   --not-when-fullscreen \
   --not-when-audio \
-  --timer 3 \
+  --timer 180 \
     'bright-set 0.4' \
     'bright-set' \
   --timer 150 \
     '! pgrep i3lock >/dev/null && i3lock-cool' \
-    'bright_set' \
+    'bright-set' \
   --timer 480 \
     'systemctl suspend' \
-    'bright_set' \
+    'bright-set' \
