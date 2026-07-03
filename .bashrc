@@ -89,7 +89,7 @@ fi
 
 # some more ls aliases
 alias ll='ls --group-directories-first -lh'
-alias ltr='ll -ltr'
+alias lt='ll -ltr'
 alias la='ls -Ah'
 # alias lt='ls -lht'
 alias l='ls -CFh'
@@ -159,10 +159,20 @@ back() {
     cp "$1" "$1.bak"
 }
 
+mpvl() {
+    dir="$HOME/Videos"
+    vids="$(ls -t $dir)"
+    chosen="$(echo "$vids" | fzf)"
+    [ -n "$chosen" ] && mpv "$dir/$chosen"
+}
+
 # git
 alias gst='git status'
 alias gdo='git dog'
 alias gdi='git diff'
+alias gfo='git fetch origin'
+alias gca='git commit --amend'
+alias grc='git rebase --continue'
 
 # dotfiles
 alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

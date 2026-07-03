@@ -70,6 +70,7 @@ return {
             delete_to_trash = false,
             constrain_cursor = 'name',
             float = {
+                border = 'rounded',
                 max_width = 0.8,
                 max_height = 0.8,
             },
@@ -90,7 +91,9 @@ return {
                 function()
                     require('treesj').toggle()
                 end,
-                mode = { 'n' },
+                mode = {
+                    'n',
+                },
                 desc = 'Treesj: Toggle split/join code block',
             },
         },
@@ -128,15 +131,13 @@ return {
                     themable = true,
                     show_close_icon = false,
                     show_buffer_close_icons = false,
+                    style_preset = {
+                        bufferline.style_preset.no_italic,
+                        bufferline.style_preset.no_bold,
+                        bufferline.style_preset.minimal
+                    },
                 },
             })
         end,
-        -- opts = {
-        --     themable = true,
-        --     indicator = {
-        --         style = 'underline',
-        --     },
-        --     show_close_icon = false,
-        -- },
     },
 }

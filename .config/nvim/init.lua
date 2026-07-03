@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 vim.o.shell = 'bash'
 vim.o.shellcmdflag = '-c'
 vim.o.shellxquote = '""'
@@ -37,7 +39,7 @@ vim.o.signcolumn = 'yes'
 
 vim.o.updatetime = 250
 
-vim.o.timeoutlen = 600
+vim.o.timeoutlen = 300
 
 vim.o.splitright = true
 vim.o.splitbelow = true
@@ -88,30 +90,6 @@ else
     vim.keymap.set('n', '<leader>gs', '<cmd>echo "No lazygit installed!"<CR>')
 end
 
-vim.keymap.set('n', '<leader>vs', function()
-    local file = vim.fn.expand('%:p')
-    local dir = vim.fn.expand('%:p:h')
-    dir = dir:gsub('^oil://', '') -- if in oil buffer, get path
-
-    vim.fn.jobstart({ 'alacritty', '--working-directory', dir, '-e', 'nvim', file }, { detach = true })
-
-    if vim.fn.executable('i3-msg') then
-        vim.fn.jobstart({ 'i3-msg', 'layout splith' }, { detach = true })
-    end
-end)
-
-vim.keymap.set('n', '<leader>hs', function()
-    local file = vim.fn.expand('%:p')
-    local dir = vim.fn.expand('%:p:h')
-    dir = dir:gsub('^oil://', '') -- if in oil buffer, get path
-
-    vim.fn.jobstart({ 'alacritty', '--working-directory', dir, '-e', 'nvim', file }, { detach = true })
-
-    if vim.fn.executable('i3-msg') then
-        vim.fn.jobstart({ 'i3-msg', 'layout splitv' }, { detach = true })
-    end
-end)
-
 -- Remap Esc
 vim.keymap.set({ 'i', 'n', 'v' }, '<C-c>', '<Esc>', { noremap = true })
 
@@ -119,7 +97,7 @@ vim.keymap.set({ 'i', 'n', 'v' }, '<C-c>', '<Esc>', { noremap = true })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -180,24 +158,31 @@ vim.keymap.set('i', '{<CR>', '{<CR>}<ESC>O')
 vim.keymap.set('i', '{;<CR>', '{<CR>};<ESC>O')
 
 -- Split opening / closing
--- vim.keymap.set('n', '<leader>vs', ':vsplit<CR>')
--- vim.keymap.set('n', '<leader>vh', ':split<CR>')
--- vim.keymap.set('n', '<leader>vo', ':only<CR>')
+vim.keymap.set('n', '<leader>vs', ':vsplit<CR>')
+vim.keymap.set('n', '<leader>vh', ':split<CR>')
+vim.keymap.set('n', '<leader>vo', ':only<CR>')
 
 -- Split navigation
-vim.keymap.set('n', '<leader>h', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<leader>l', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<leader>j', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<leader>k', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<A-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<A-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<A-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<A-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-vim.keymap.set('n', '<leader>H', '<C-w>H', { desc = 'Move split to the left' })
-vim.keymap.set('n', '<leader>L', '<C-w>L', { desc = 'Move split to the right' })
-vim.keymap.set('n', '<leader>J', '<C-w>J', { desc = 'Move split to the lower' })
-vim.keymap.set('n', '<leader>K', '<C-w>K', { desc = 'Move split to the upper' })
+vim.keymap.set('n', '<A-S-H>', '<C-w>H', { desc = 'Move split to the left' })
+vim.keymap.set('n', '<A-S-L>', '<C-w>L', { desc = 'Move split to the right' })
+vim.keymap.set('n', '<A-S-J>', '<C-w>J', { desc = 'Move split to the lower' })
+vim.keymap.set('n', '<A-S-K>', '<C-w>K', { desc = 'Move split to the upper' })
+
+-- Split resizing
+vim.keymap.set('n', '<leader>h', '<C-w><', { desc = 'Move split to the left' })
+vim.keymap.set('n', '<leader>l', '<C-w>>', { desc = 'Move split to the right' })
+vim.keymap.set('n', '<leader>j', '<C-w>-', { desc = 'Move split to the left' })
+vim.keymap.set('n', '<leader>k', '<C-w>+', { desc = 'Move split to the right' })
 
 -- Tab nav
 vim.keymap.set('n', '<C-h>', ':BufferLineCyclePrev<CR>', { desc = 'Bufferline: Goto previous buffer', silent = true })
 vim.keymap.set('n', '<C-l>', ':BufferLineCycleNext<CR>', { desc = 'Bufferline: Goto next buffer', silent = true })
+vim.keymap.set('n', '<leader>bl', ':BufferLinePick<CR>', { desc = 'Bufferline: Pick buffer', silent = true })
 vim.keymap.set(
     'n',
     '<C-w>',
@@ -225,12 +210,6 @@ end, { expr = true })
 vim.keymap.set({ 'n', 'v' }, '<C-k>', function()
     return (vim.v.count > 0 and vim.v.count * 5 or 5) .. 'k'
 end, { expr = true })
-
--- Split resizing
-vim.keymap.set('n', '<A-h>', '<C-w><', { desc = 'Move split to the left' })
-vim.keymap.set('n', '<A-l>', '<C-w>>', { desc = 'Move split to the right' })
-vim.keymap.set('n', '<A-j>', '<C-w>-', { desc = 'Move split to the left' })
-vim.keymap.set('n', '<A-k>', '<C-w>+', { desc = 'Move split to the right' })
 
 -- Go to next instance
 vim.keymap.set('n', ')', '*')
@@ -260,6 +239,17 @@ vim.api.nvim_create_autocmd('VimLeave', {
         -- Use vim.fn.system with a table to safely pass the content
         -- This avoids issues with special characters or newlines
         vim.fn.system({ 'xclip', '-selection', 'clipboard' }, clipboard_content)
+    end,
+})
+
+-- disable <CR> mapping in qflist
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'qf',
+    callback = function(args)
+        vim.keymap.set('n', '<CR>', '<CR>', {
+            buffer = args.buf,
+            remap = true,
+        })
     end,
 })
 
@@ -402,7 +392,7 @@ require('lazy').setup(
         {
             -- Main LSP Configuration
             'neovim/nvim-lspconfig',
-            version = '2.3',
+            -- version = '2.3',
             dependencies = {
                 -- Mason must be loaded before its dependents so we need to set it up here.
                 { 'mason-org/mason.nvim', opts = {}, version = 'v1.*' },
@@ -490,7 +480,7 @@ require('lazy').setup(
                     update_in_insert = false,
                     severity_sort = true,
                     float = { border = 'rounded', source = 'if_many' },
-                    underline = { severity = vim.diagnostic.severity.ERROR },
+                    underline = { severity = { min = vim.diagnostic.severity.WARN } },
                     signs = vim.g.have_nerd_font and {
                         text = {
                             [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -499,17 +489,16 @@ require('lazy').setup(
                             [vim.diagnostic.severity.HINT] = '󰌶 ',
                         },
                     } or {},
-                    virtual_text = {
-                        source = 'if_many',
-                        spacing = 2,
-                        format = function(diagnostic)
-                            local diagnostic_message = {
-                                [vim.diagnostic.severity.ERROR] = diagnostic.message,
-                                [vim.diagnostic.severity.WARN] = diagnostic.message,
-                                [vim.diagnostic.severity.INFO] = diagnostic.message,
-                                [vim.diagnostic.severity.HINT] = diagnostic.message,
-                            }
-                            return diagnostic_message[diagnostic.severity]
+                    virtual_text = true, -- Text shows up at the end of the line
+                    virtual_lines = false, -- Text shows up underneath the line, with virtual lines
+                    -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
+                    jump = {
+                        on_jump = function(_, bufnr)
+                            vim.diagnostic.open_float({
+                                bufnr = bufnr,
+                                scope = 'cursor',
+                                focus = false,
+                            })
                         end,
                     },
                 })
@@ -585,7 +574,9 @@ require('lazy').setup(
                             server.capabilities =
                                 vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
 
-                            require('lspconfig')[server_name].setup(server)
+                            -- require('lspconfig')[server_name].setup(server)
+                            vim.lsp.config(server_name, server)
+                            vim.lsp.enable(server_name)
                         end,
                     },
                 })
@@ -659,7 +650,7 @@ require('lazy').setup(
         { -- Autocompletion
             'saghen/blink.cmp',
             event = 'VimEnter',
-            version = '*',
+            version = '1.*',
             dependencies = {
                 -- Snippet Engine
                 {
@@ -699,6 +690,7 @@ require('lazy').setup(
                     ['<C-n>'] = { 'select_next', 'fallback' },
                     ['<C-j>'] = { 'scroll_documentation_down', 'fallback' },
                     ['<C-k>'] = { 'scroll_documentation_up', 'fallback' },
+                    ['<C-s>'] = { 'show_signature', 'hide_signature', 'fallback'},
                 },
 
                 appearance = {
@@ -777,6 +769,7 @@ require('lazy').setup(
         { -- You can easily change to a different colorscheme.
             'vague2k/vague.nvim',
             priority = 1000, -- Make sure to load this before all the other start plugins.
+            lazy = false,
             config = function()
                 require('vague').setup({
                     italic = false,
@@ -822,6 +815,7 @@ require('lazy').setup(
         },
         { -- Highlight, edit, and navigate code
             'nvim-treesitter/nvim-treesitter',
+            version = 'v0.1',
             lazy = false,
             build = ':TSUpdate',
         },
@@ -859,3 +853,6 @@ require('lazy').setup(
 
 -- -- [[ Colorscheme ]]
 vim.cmd.colorscheme('minicyan')
+
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'NONE' })

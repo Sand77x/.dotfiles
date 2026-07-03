@@ -11,8 +11,9 @@
 	fush = push --force-with-lease
 	frune = fetch --prune
 	ball = branch --all
-	cend = commit --amend
 [include]
 	path = ~/.gitconfig_local
 [credential]
 	helper = store
+[init]
+	defaultBranch = main

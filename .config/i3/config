@@ -227,9 +227,9 @@ set $ws10 "10"
 # assign programs to workspaces
 for_window [class="Brave-browser"]\
         move container to workspace $ws1; workspace $ws1
-for_window [class="unityhub|Apache JMeter|Blender Render|Image Editor"]\
+for_window [class="unityhub|Apache JMeter|Blender Render|Image Editor|beekeeper-studio"]\
         move container to workspace $ws2; workspace $ws2
-for_window [class="Xfce4-terminal|Alacritty|Blender|Unity|jetbrains-idea|Code|kdenlive"]\
+for_window [class="Xfce4-terminal|Alacritty|Blender|Unity|jetbrains-idea|jetbrains-webstorm|Code|kdenlive"]\
         move container to workspace $ws3; workspace $ws3
 for_window [class="discord|steam"]\
         move container to workspace $ws4; workspace $ws4
