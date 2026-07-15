@@ -66,6 +66,8 @@ nmap <C-h> <Action>(PreviousTab)
 nmap <C-S-l> <Action>(com.mnw.tabmover.actions.MoveTabDownAction)
 nmap <C-S-h> <Action>(com.mnw.tabmover.actions.MoveTabUpAction)
 
+nmap <leader>gb <Action>(Annotate)
+
 nmap \ :NERDTree<CR>
 nmap <leader>\ :NERDTreeToggle<CR>
 

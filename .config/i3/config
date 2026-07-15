@@ -160,8 +160,8 @@ bindsym $mod+z       $execnsi i3-dmenu-desktop
 bindsym $mod+Shift+z $execnsi dmenu_run
 
 # kill windows and processes
-bindsym $mod+w       kill
-bindsym $mod+Shift+w $execnsi dmenu-pkill
+bindsym $mod+Shift+w       kill
+bindsym $mod+w $execnsi dmenu-pkill
 
 # change focus
 bindsym $mod+h focus left
