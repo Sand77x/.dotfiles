@@ -690,7 +690,7 @@ require('lazy').setup(
                     ['<C-n>'] = { 'select_next', 'fallback' },
                     ['<C-j>'] = { 'scroll_documentation_down', 'fallback' },
                     ['<C-k>'] = { 'scroll_documentation_up', 'fallback' },
-                    ['<C-s>'] = { 'show_signature', 'hide_signature', 'fallback'},
+                    ['<C-s>'] = { 'show_signature', 'hide_signature', 'fallback' },
                 },
 
                 appearance = {
@@ -815,9 +815,18 @@ require('lazy').setup(
         },
         { -- Highlight, edit, and navigate code
             'nvim-treesitter/nvim-treesitter',
-            version = 'v0.1',
+            branch = 'main',
             lazy = false,
             build = ':TSUpdate',
+
+            config = function()
+                -- enable treesitter highlighting
+                vim.api.nvim_create_autocmd('FileType', {
+                    callback = function(args)
+                        pcall(vim.treesitter.start, args.buf)
+                    end,
+                })
+            end,
         },
 
         -- Kickstart default plugins
